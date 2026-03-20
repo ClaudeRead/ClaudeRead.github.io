@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/252286375?v=4&size=64"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="&emsp;&emsp;从DeepSeek火爆的时候我开始正式接触AI，了解过一些底层原理，但是也仅限于知道是怎么回事，在往下就没有细究了，更多的是在探索怎么结合AI让我学习工作效率更高。">
+<meta property="og:title" content="关于这段时间AI的使用思考">
+<meta property="og:description" content="&emsp;&emsp;从DeepSeek火爆的时候我开始正式接触AI，了解过一些底层原理，但是也仅限于知道是怎么回事，在往下就没有细究了，更多的是在探索怎么结合AI让我学习工作效率更高。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/guan-yu-zhe-duan-shi-jian-AI-de-shi-yong-si-kao.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
+<title>关于这段时间AI的使用思考</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">关于这段时间AI的使用思考</h1>
+<div class="title-right">
+    <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/34" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>  从DeepSeek火爆的时候我开始正式接触AI，了解过一些底层原理，但是也仅限于知道是怎么回事，在往下就没有细究了，更多的是在探索怎么结合AI让我学习工作效率更高。我一直秉持一个观点，任何一门技术或是产品的诞生本质上不是替代人类，而是为了提高人类的生产力，提升效率，就相当于古代自从人类社会从石器时代进入到铁器牛耕时代，人类的生产力得到了极大的提升。相对应的现在AI的出现，它的作用我个人认为其实就和当时出现铁器牛耕是相同的作用，本身互联网的出现就意味着信息从过去的单一进入到一个大爆炸的时代，通过搜索引擎，你能知道这个世界上80%信息(剩下那20%属于是那种只可意会不可言传的那部分)。做个形象的比喻，你可以把互联网看作是一个存放资源的资源柜子，我每次想在这个柜子里面找东西的时候，我只要打开柜门，一大把文件从柜子里面掉出来，然后我在这些文件里面一个个翻，直到找到我想找的内容。这就带来一个问题，效率和准确率，我需要在一个堆成小山一样的一落文件中找到我想要的内容，那么浏览器的作用就好比这些文件上的标签，我只能先看标签，根据标签上的内容，来判断这份文件是不是我需要的，至于里面写的内容是符不符合我的预期，我不知道，我只能把相类似的文件一个个拆开，然后来评判里面的内容。直到有一天来了一个老哥，他专门负责对柜子里的文件进行整理，你只需告诉你的需求，他就会结合他的经验和他的效率把你最想要的信息给你，并且还会十分贴心的帮你总结文件的相同地方和不同的地方。这可比之前一个个翻的效率和质量高多了。<br>
+  自从AI出现了之后，现在好像大家都很焦虑，生怕自己的岗位哪天就被人代替了，就如同游戏《底特律：变人》中数年之后AI把人类岗位代替了，然后人类开始起义。事实上会这样吗？先不说往后，先说当下，当下的各家大模型或者带有人工智能的相关产品，到底是可以脱离人类代替人类的工作还是说还是要有人参与进来监督AI工作？就算一个工厂里头，全部智能化作业，AI当监工，是否就能说明这个工厂在生产上百分之百就是安全的？我想这是不能的吧，别的方面暂且不提，就说安全层面，我是否可以仿照你搓一个AI,但是我这个AI用一些恶意代码或病毒训练，然后对你分析在对你发起网络进攻呢。我想基于当下的技术手段，这样是完全可以实现的吧，就算在发展个七八十年这种手段就是看成本问题大家愿不愿意做了。<br>
+  再说回代替的问题，参照当下各家人工智能的发展，目前来说还没哪家敢说能做到百分之百做到完全代替吧，当下的大模型还无法做到你给大模型一句大白话，大模型就能准确无误的给出你想要的东西。就拿开发来说，我这几天体验了DeepSeek、Kimi、GLM、豆包、GPT、Claude、Google-Mini，综合下来，目前还没有一家我给他大白话他就能给我生成我是想要的内容，就比如，我最近尝试开发的依据等保2.0企业自查应用。我刚开始是这么告诉AI的：我想开发一个企业基于等保2.0相关标准进行自我检查的一个网页应该，这个应用可以让企业在内部先用这套系统进行自检，然后针对高风险项进行整改。只给AI提大致需求和项目背景，别的一概不知，完全让AI自己生成，自己选择技术路线。各家速度都很快，但是结果真的是一言难尽，DeepSeek、GLM虽然生成了，但是只是框架，前端页面数据还都是假的，只是用于展示个大概，里面功能模块都是待开发状态，Kimi、豆包也是只是框架，甚至还有报错😅😅😅，GPT、Claude起码还有个数据库，虽然功能不齐全，但是起码可以于后端交互，并且在代码的安全性上相比前面几家要高的多，这几家虽然都做了用户登录界面，但是只有GLM、GPT、Claude对登录处做了JWT。后来我将我的需求明确，从背景、技术路线选择、系统框架、功能模块设计等等做了一个产品需求文档，有了这份文档，各家的模型生成的就好了很多，但是从目前质量上来看，GPT、Claude属于独一档，GLM、DeepSeek-V3属于第二档，同样我也问了用AI写小说的伙计，在小说文字领域，国内大模型的使用体验感要比国外的好很多，起码价格上就很能让人接受，并且使用体验上也比国外的要强，用来写18+的小说简直好用到离谱😂😂😂。所以现在网上各路媒体都在说AI会逐步替代某些岗位，我想说，这个东西得辩证的去看待，涉及到初级的、大量重复的岗位基本上确实有会被代替的趋势，但是你要说百分之百全面代替那简直是痴人说梦，其次安全性这关你就过不去。有时候一个技术的发展不要看媒体怎么吹，下来动手试一试，研究研究，你会得到很多不一样的结论。<br>
+  就比如最近十分爆火的OpenClaw，各大媒体疯狂吹捧这有多么多么好，多么优秀，可但是呢？？？怎么光见媒体说好不见说坏处呢？这世上还难不成还真有全是好处的事没有一点坏处的事吗？前脚说好，后脚工信部就发安全提醒，<code class="notranslate">"工信部网络安全威胁和漏洞信息共享平台在预警中明确指出，由于OpenClaw在部署时"信任边界模糊"，且具备自身持续运行、自主决策、调用系统和外部资源等特性，在缺乏有效权限控制、审计机制和安全加固的情况下，可能因指令诱导、配置缺陷或被恶意接管，执行越权操作，造成信息泄露、系统受控等一系列安全风险。"</code>，现在网上同时出现因为配置不当导致信用卡被盗刷的案例。同时OpenClaw十分烧Token，如果接入了国外的模型，这个费用是指数级暴涨，说它是"Token熔炉"一点都不过分。如果要本地部署，你不可能只运行一个OpenClaw，你还得本地配置各路的大模型，光这硬件成本就够普通人喝一壶的😓😓😓你说要接云端API，你要不看看一个小时你后充的钱还剩多少，支持你8个小时连续使用吗😓😓😓通过使用下来我发现OpenClaw接入单一大模型根本体现不了优势，它能干的，其他网页端的模型平台也能干，大模型干不了的，OpenClaw更干不了。所以这次OpenClaw的爆火以及媒体的吹捧，我只能说还是韭菜好割，它并不适合绝大部分人。借用群里一个帖子里面的暴论，我认为这个爆论十分符合当下<code class="notranslate">简单且重复工作越多，越需要 OpenClaw，说明自己越菜，你要做的不是安装 OpenClaw，而是反思自己为什么这么菜逼。</code><br>
+  总结：不要自媒体说什么，大家就焦虑什么，国内的自媒体除了官媒还有少数有良心的，剩下都是一帮苍蝇，专门贩卖各种焦虑各种割韭菜。从来不仔细客观的分析，动不动就是AI要代替岗位了，你再不用你就怎么怎么样了🤬🤬🤬🤬🤬所以我想说，AI技术的出现，是个好事，而且它能极大的提升个人的学习和工作效率，就看你怎么用，对于开发，你可以让豆包、ds给你写产品文档，然后用GLM去做系统框架，在用GPT或者Claude去完成功能模块。你要做到是发挥各个模型的优势，把他们整合到一起来辅助你提高你的学习或工作的效率，并不是整天受自媒体的影响天天担心AI要顶替你，要明白任何技术的发展其本质是推动人类文明的进步提高人类的生产力和生产水平，当然还有割韭菜。但是怎么用完全取决于你对于这个技术的出现你的理解是什么，你怎么去看待这项新技术，这个技术是否适用于你的需求。所以还是那句话......菜就多练！！！！</p>
+</div>
+<div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://ClaudeRead.github.io">ClaudeRead</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("09/12/2018"!=""){
+    var startSite=new Date("09/12/2018");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek main https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","ClaudeRead/ClaudeRead.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>

