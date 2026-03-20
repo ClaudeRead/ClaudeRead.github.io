@@ -10,15 +10,13 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="#### 事件经过
-&emsp;&emsp;2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。">
-<meta property="og:title" content="安全巡检中发现攻击事件排查">
-<meta property="og:description" content="#### 事件经过
-&emsp;&emsp;2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。">
+<meta name="description" content="&emsp;&emsp;综述：某日进行安全巡检中通过安全设备发现内网x.x.x.x出现安全告警，通过数据包分析确确认攻击行为。">
+<meta property="og:title" content="记录某日安全巡检中发现某业务发生安全问题">
+<meta property="og:description" content="&emsp;&emsp;综述：某日进行安全巡检中通过安全设备发现内网x.x.x.x出现安全告警，通过数据包分析确确认攻击行为。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://ClaudeRead.github.io/post/an-quan-xun-jian-zhong-fa-xian-gong-ji-shi-jian-pai-cha.html">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/ji-lu-mou-ri-an-quan-xun-jian-zhong-fa-xian-mou-ye-wu-fa-sheng-an-quan-wen-ti.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
-<title>安全巡检中发现攻击事件排查</title>
+<title>记录某日安全巡检中发现某业务发生安全问题</title>
 
 
 
@@ -51,7 +49,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">安全巡检中发现攻击事件排查</h1>
+<h1 class="postTitle">记录某日安全巡检中发现某业务发生安全问题</h1>
 <div class="title-right">
     <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -59,7 +57,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/39" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/40" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -75,20 +73,28 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h4>事件经过</h4>
-<p>  2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。</p>
-<p>  发现攻击后通知运维人员下发杀毒任务并进行上机排查。下午与业务人员沟通，业务人员反馈杀毒时将恶意文件删除，故没有文件凭证。该IP隶属子公司，并且该IP部署业务中涉及若依OA系统。后续根据安全态势中显示x.x.x.x外联111.229.247.93，对该IP进行排查，该IP鉴定为恶意IP，且上传的c.exe被定义为恶意木马文件。据此推测在服务器中的c.exe可能为开源情报中提及的恶意文件。进一步调查显示，该IP在8092端口上部署ARL灯塔资产收集系统，在60000端口上部署Viper(炫彩蛇)内网渗透工具。在渗透测试中发现该系统存在shiro反序列化漏洞，该漏洞可以构造相应的请求包对服务器发起攻击，从而获得服务器权限进入内网。<br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/db821778f6b80c3cca6995131bf5b314b03e3f8cb18d4d8ac0cc971e4b437cf4/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696e666f2e706e67"><img src="https://camo.githubusercontent.com/db821778f6b80c3cca6995131bf5b314b03e3f8cb18d4d8ac0cc971e4b437cf4/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696e666f2e706e67" alt="微步信息" data-canonical-src="https://ClaudeRead.github.io/Images/info.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c1f21d62b385840ee1fad16ddd331df75dee4322839ef43fb61639dad3ec4ca9/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f66696c6561747461636b2e706e67"><img src="https://camo.githubusercontent.com/c1f21d62b385840ee1fad16ddd331df75dee4322839ef43fb61639dad3ec4ca9/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f66696c6561747461636b2e706e67" alt="恶意文件信息" data-canonical-src="https://ClaudeRead.github.io/Images/fileattack.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/51b3acfea60dad11bb690777eb65ad6e385dcb1ae95ee0d212507edfac221d9b/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f76697065722e706e67"><img src="https://camo.githubusercontent.com/51b3acfea60dad11bb690777eb65ad6e385dcb1ae95ee0d212507edfac221d9b/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f76697065722e706e67" alt="Viper" data-canonical-src="https://ClaudeRead.github.io/Images/viper.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/e297466ace51b4bf560984d03ab60a834f78509ee8180747b3c2837b30ecadcb/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f61726c2e706e67"><img src="https://camo.githubusercontent.com/e297466ace51b4bf560984d03ab60a834f78509ee8180747b3c2837b30ecadcb/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f61726c2e706e67" alt="ARL" data-canonical-src="https://ClaudeRead.github.io/Images/arl.png" style="max-width: 100%;"></a></p>
-<h4>抑制和根除阶段</h4>
+<div class="markdown-body" id="postBody"><p>  综述：某日进行安全巡检中通过安全设备发现内网x.x.x.x出现安全告警，通过数据包分析确确认攻击行为。随后确认该IP归属某业务，攻击IP源自总部下属子公司，随机开展应急响应。</p>
+<h4>一、安全处置过程</h4>
+<p>  使用SSH进行连接，使用cat /etc/passwd查看所有用户，通过与管理员确认，passwd下用户均为正常用户。在root用户下使用 <code class="notranslate">cat /etc/passwd | cut -f 1 -d : |xargs -I {} crontab -l -u {}</code> 命令查看所有用户的定时任务，发现存在一个定时任务。<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/2deeed92e94995c6e0fe8081a648d6374aedeca1f74289ee64ce1e9e23e0f53e/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652e706e67"><img src="https://camo.githubusercontent.com/2deeed92e94995c6e0fe8081a648d6374aedeca1f74289ee64ce1e9e23e0f53e/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652e706e67" alt="定时任务截图" data-canonical-src="https://ClaudeRead.github.io/Images/image.png" style="max-width: 100%;"></a></p>
+<p>  经与passwd下所有用户对照，发现缺少root用户，怀疑此定时任务存在root用户下。随即使用<code class="notranslate">crontab -l</code>命令查看当前root下的定时任务，发现root用户中存在定时任务。</p>
+<p>  进入/etc 目录下逐个查看定时任务,经排查，发现恶意定时任务存在在<code class="notranslate">/etc/crontab</code>和<code class="notranslate">/etc/cron.d/zzh</code>中<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/24607c94df41d4fd9f8377a3a7f7c08f6a95d677ded3a90399c139cb33641e91/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d312e706e67"><img src="https://camo.githubusercontent.com/24607c94df41d4fd9f8377a3a7f7c08f6a95d677ded3a90399c139cb33641e91/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d312e706e67" alt="定时任务截图" data-canonical-src="https://ClaudeRead.github.io/Images/image-1.png" style="max-width: 100%;"></a></p>
+<p>  通过对涉及的文件进行分析，文件当中涉及到的两个域名‘s.na-cs.com’、‘b.clu-e.eu’均为恶意域名，部署挖矿病毒组织为TeamTNT。TeamTNT挖矿组织首次被发现于2019年10月，其主要针对云主机和容器化环境进行攻击，例如像Docker、Kubernetes和Redis等。该组织在成功入侵目标后，会对目标系统投放僵尸网络程序和挖矿木马，组建僵尸网络并利用目标系统资源进行挖矿。且写入方式使用x.x.x.x的Redis未授权漏洞结合定时任务在该服务器下部署挖矿病毒。并在root路径下上传一个恶意文件crbak.txt。<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/4490e1665fb12a46e1918424d47ab010c22d0205f33c7ae40ef79c106d0229fd/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d332e706e67"><img src="https://camo.githubusercontent.com/4490e1665fb12a46e1918424d47ab010c22d0205f33c7ae40ef79c106d0229fd/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d332e706e67" alt="恶意IP" data-canonical-src="https://ClaudeRead.github.io/Images/image-3.png" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/88d1e6c4874a406ccfce9305e86b5ec0bb47fd7730bd0d09d3056db89629aa07/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d342e706e67"><img src="https://camo.githubusercontent.com/88d1e6c4874a406ccfce9305e86b5ec0bb47fd7730bd0d09d3056db89629aa07/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d342e706e67" alt="恶意IP" data-canonical-src="https://ClaudeRead.github.io/Images/image-4.png" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/61b1135938434d9e749e3c6fc9f9db5a4a4575435939446efaed3e6d03fe3ad8/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d322e706e67"><img src="https://camo.githubusercontent.com/61b1135938434d9e749e3c6fc9f9db5a4a4575435939446efaed3e6d03fe3ad8/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696d6167652d322e706e67" alt="恶意文件" data-canonical-src="https://ClaudeRead.github.io/Images/image-2.png" style="max-width: 100%;"></a></p>
+<p>  综上所述，此次攻击事件为TeamTNT挖矿组织使用Redis未授权漏洞结合定时任务，先在root目录下部署一个恶意文件，恶意文件中每3分钟使用wget命令拉取目标域名s.na-cs.com，每周日晚上对日志进行删除。同时开启有具体时间的系统级别的定时任务和系统级别的定时任务。</p>
+<h4>二、处置结果</h4>
 <ol>
-<li>对恶意文件进行删除</li>
-<li>防火墙添封禁外联IP</li>
-<li>对涉及主机进行杀毒</li>
-<li>对漏洞进行修补</li>
+<li>删除恶意文件和恶意定时任务进行删除</li>
+<li>对服务器进行杀毒</li>
+<li>对子公司下发进行安全排查通告</li>
 </ol>
+<h4>相关漏洞参考链接</h4>
+<ul>
+<li><a href="https://wiki.wgpsec.org/knowledge/web/unauthorized.html" rel="nofollow">https://wiki.wgpsec.org/knowledge/web/unauthorized.html</a></li>
+</ul>
 </div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
 

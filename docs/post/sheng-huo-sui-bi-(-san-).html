@@ -10,15 +10,13 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="#### 事件经过
-&emsp;&emsp;2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。">
-<meta property="og:title" content="安全巡检中发现攻击事件排查">
-<meta property="og:description" content="#### 事件经过
-&emsp;&emsp;2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。">
+<meta name="description" content="&emsp;&emsp;最近入手了一台XSS，人生的第一台主机，不得不说是真滴香🐮🐮🐮🐮🐮🐮。">
+<meta property="og:title" content="生活随笔(三)">
+<meta property="og:description" content="&emsp;&emsp;最近入手了一台XSS，人生的第一台主机，不得不说是真滴香🐮🐮🐮🐮🐮🐮。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://ClaudeRead.github.io/post/an-quan-xun-jian-zhong-fa-xian-gong-ji-shi-jian-pai-cha.html">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-san-%29.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
-<title>安全巡检中发现攻击事件排查</title>
+<title>生活随笔(三)</title>
 
 
 
@@ -51,7 +49,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">安全巡检中发现攻击事件排查</h1>
+<h1 class="postTitle">生活随笔(三)</h1>
 <div class="title-right">
     <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -59,7 +57,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/39" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/44" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -75,20 +73,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h4>事件经过</h4>
-<p>  2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。</p>
-<p>  发现攻击后通知运维人员下发杀毒任务并进行上机排查。下午与业务人员沟通，业务人员反馈杀毒时将恶意文件删除，故没有文件凭证。该IP隶属子公司，并且该IP部署业务中涉及若依OA系统。后续根据安全态势中显示x.x.x.x外联111.229.247.93，对该IP进行排查，该IP鉴定为恶意IP，且上传的c.exe被定义为恶意木马文件。据此推测在服务器中的c.exe可能为开源情报中提及的恶意文件。进一步调查显示，该IP在8092端口上部署ARL灯塔资产收集系统，在60000端口上部署Viper(炫彩蛇)内网渗透工具。在渗透测试中发现该系统存在shiro反序列化漏洞，该漏洞可以构造相应的请求包对服务器发起攻击，从而获得服务器权限进入内网。<br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/db821778f6b80c3cca6995131bf5b314b03e3f8cb18d4d8ac0cc971e4b437cf4/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696e666f2e706e67"><img src="https://camo.githubusercontent.com/db821778f6b80c3cca6995131bf5b314b03e3f8cb18d4d8ac0cc971e4b437cf4/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696e666f2e706e67" alt="微步信息" data-canonical-src="https://ClaudeRead.github.io/Images/info.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c1f21d62b385840ee1fad16ddd331df75dee4322839ef43fb61639dad3ec4ca9/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f66696c6561747461636b2e706e67"><img src="https://camo.githubusercontent.com/c1f21d62b385840ee1fad16ddd331df75dee4322839ef43fb61639dad3ec4ca9/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f66696c6561747461636b2e706e67" alt="恶意文件信息" data-canonical-src="https://ClaudeRead.github.io/Images/fileattack.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/51b3acfea60dad11bb690777eb65ad6e385dcb1ae95ee0d212507edfac221d9b/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f76697065722e706e67"><img src="https://camo.githubusercontent.com/51b3acfea60dad11bb690777eb65ad6e385dcb1ae95ee0d212507edfac221d9b/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f76697065722e706e67" alt="Viper" data-canonical-src="https://ClaudeRead.github.io/Images/viper.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/e297466ace51b4bf560984d03ab60a834f78509ee8180747b3c2837b30ecadcb/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f61726c2e706e67"><img src="https://camo.githubusercontent.com/e297466ace51b4bf560984d03ab60a834f78509ee8180747b3c2837b30ecadcb/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f61726c2e706e67" alt="ARL" data-canonical-src="https://ClaudeRead.github.io/Images/arl.png" style="max-width: 100%;"></a></p>
-<h4>抑制和根除阶段</h4>
-<ol>
-<li>对恶意文件进行删除</li>
-<li>防火墙添封禁外联IP</li>
-<li>对涉及主机进行杀毒</li>
-<li>对漏洞进行修补</li>
-</ol>
+<div class="markdown-body" id="postBody"><p>  最近入手了一台XSS，人生的第一台主机，不得不说是真滴香🐮🐮🐮🐮🐮🐮。记得小学二三年级那会儿，真的很羡慕小伙伴手上的PS游戏机，当时玩的还是宝可梦和罪恶都市还有一个三国的什么游戏，所以那时候有事没事都去小伙伴那蹭游戏。后来应该是上六年级吧家里装了电脑，当时第一件事就是下穿越火线，那时候这游戏可不像现在这么😫这游戏在我那个时候真的受众程度不亚于LOL，也就是从这个时候开始慢慢接触“3A游戏”</p>
+<p>  当时我玩的第一个单机游戏就是《使命召唤1》毕竟预算有限，大屁股能带动这游戏还不卡还要啥自行车。关键是这游戏还是从三大妈上下的盗版。虽然是盗版那也玩着很开心，剧情先不说，就那种声临其境的战斗场面加上激情的配乐真的是肾上腺素拉满，那个时候也不懂什么射击手感，反正就刺激好玩就对了，况且这游戏的本子写的在那个年代算是比较出色的。也就导致当时放学回家第一件事就是先看家长在家没，没在家Ok开机！打仗!</p>
+<p>  再后来就开始愈发不可收拾《使命召唤》《荣誉勋章》《二战狙击手v5》《红警》(玩的很多，但是能记住的也就这些了)当时还有一个软件叫快玩(快游….忘了)盒子，里面集成了很多当时市面上最火的单机游戏还有一些老牌单机游戏。所以我借助那个软件，只要我电脑带的起来玩就对了。当我接触了这些单机游戏后，忽然就觉得，这网络游戏变得怎么就未如嚼蜡(🥬🐕不配玩网游)反正当时也尝试着跟小伙伴打网游，但是网游带来的体验我感觉真的不如单机带来的那种沉浸式体验好。在到大学换了拯救者，只要Steam,育碧打折，e宝送游戏，基本上游戏内容差不多的我都一个不拉的都入库。</p>
+<p>  不管怎么说，就打游戏这件事而言，我家里是举双手反对的，他们觉得你有打游戏的时间不如出去下楼耍，或者去学习怎么怎么样。以至于到现在家里人都认为我从来不打游戏或者就是偶尔偶尔打游戏那种。在家我打游戏都是背着他们偷偷打很少有光明正大的打(但是自从上班了，打游戏的时间真的很少)只是现在由于我上班了，所以我在家打游戏他们也就没那么反感，但是偶尔也会说。我上高中的时候就打游戏这个事情也跟父母商讨过，但是他们一致认为打游戏是百害而无一利，花钱买游戏更是脑子进水的行为。</p>
+<p>  现在我也在反思游戏真的有父母口中的百害而无一利吗？游戏真的到了过街老鼠人人喊打吗？？？就我的成长经历来看，游戏好像对于我来说好像没什么影响，要非说有影响的话就是我自小就成绩不好，但是这个确实不百分之白就说是游戏造成的。没上大学前我就喜欢玩，真的就是不喜欢学习，学不进去，只喜欢学自己感兴趣的东西。我个人感觉游戏就带给我的好像没有什么坏处，相反带来的好像都是好处。 我对计算机的好奇，毫不夸张的讲就是来源于游戏。自从开始打单机游戏之后，我一直对计算机这个神奇的东西都抱有好奇，甚至我高中我选择文科的时候我依然对计算机抱有强烈的兴趣。我上高中时候家里才给我配的手机，我拿到手第一件事就是翻墙上谷歌上油管看维基，当时在油管上面经常搜一些奇奇怪怪的东西也经常看国外的玩家通关游戏，那时候我的涉猎面已经不在限制于书本上的东西，以至于我在上大学的时候虽然学的托马斯小火车专业但是闲暇时候依然去蹭他们计算机的相关课程。虽然听的时候真的是昏昏欲睡，但是或多或少我不是一个电脑小白，大学那阵子做大作业，愣是熬了两天写拿最基础的java给大作业写了一个脚本出来。原本需要好几周的大作业一个下午不光自己搞完了，还个整个宿舍搞完了。大学又自己捣鼓云服务器，又捣鼓各种稀奇古怪的配置。。。我现在回看我的兴趣爱好，除了体育上面，剩下的都是跟计算机有关的。让我找对这些兴趣的起源，我除了游戏我找不到第二个起源点。</p>
+<p>  当我打那些大作的时候，就好像在读一本本半科幻半现实的小说。游戏策划带着你认识一个又一个全新的世界，虽然它是虚拟的，但是它也来源于生活，来源于现实，映射到我们每个人。每一个大作打完都能或多或少的感悟甚至思考。尤其是我在打完大表哥2，亚瑟最后的救赎，何西阿宁死也没有说出帮派的信息，马掌台里那个老兵一直对亚瑟的感谢，约翰时常念叨“我不经常提起他，但我经常想念他”。每个人物都是那么的真实，富有感情，有血有肉。也是这个游戏，让我忽然觉得“不是所有的游戏都配叫做游戏”。</p>
+<p>  啰里吧嗦说这么多，只是想传达一个观点，游戏没有那么可怕，游戏也没有百害而无一利，真正可怕的是人，是你怎么认为，它就是你眼中的那个样子。我不反对打游戏，相反我有时候是提倡打游戏，switch合家欢一家人饭后先闲暇时一起陪孩子快快乐乐的打游戏不比回家每个人抱着手机各自看各自的香？？反正现在就搞不懂，一说游戏就是各种骂，各种封杀，别问问就是游戏害的。。。。反正就挺魔幻😔</p>
 </div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
 

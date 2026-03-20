@@ -10,15 +10,13 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="#### 事件经过
-&emsp;&emsp;2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。">
-<meta property="og:title" content="安全巡检中发现攻击事件排查">
-<meta property="og:description" content="#### 事件经过
-&emsp;&emsp;2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。">
+<meta name="description" content="&emsp;&emsp;这一年一半记忆在电脑上，一半的记忆在学校，拿了三个无关痛痒的红本本，也没有太多惊喜。">
+<meta property="og:title" content="2020年总结">
+<meta property="og:description" content="&emsp;&emsp;这一年一半记忆在电脑上，一半的记忆在学校，拿了三个无关痛痒的红本本，也没有太多惊喜。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://ClaudeRead.github.io/post/an-quan-xun-jian-zhong-fa-xian-gong-ji-shi-jian-pai-cha.html">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/2020-nian-zong-jie.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
-<title>安全巡检中发现攻击事件排查</title>
+<title>2020年总结</title>
 
 
 
@@ -51,7 +49,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">安全巡检中发现攻击事件排查</h1>
+<h1 class="postTitle">2020年总结</h1>
 <div class="title-right">
     <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -59,7 +57,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/39" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/37" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -75,20 +73,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h4>事件经过</h4>
-<p>  2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。</p>
-<p>  发现攻击后通知运维人员下发杀毒任务并进行上机排查。下午与业务人员沟通，业务人员反馈杀毒时将恶意文件删除，故没有文件凭证。该IP隶属子公司，并且该IP部署业务中涉及若依OA系统。后续根据安全态势中显示x.x.x.x外联111.229.247.93，对该IP进行排查，该IP鉴定为恶意IP，且上传的c.exe被定义为恶意木马文件。据此推测在服务器中的c.exe可能为开源情报中提及的恶意文件。进一步调查显示，该IP在8092端口上部署ARL灯塔资产收集系统，在60000端口上部署Viper(炫彩蛇)内网渗透工具。在渗透测试中发现该系统存在shiro反序列化漏洞，该漏洞可以构造相应的请求包对服务器发起攻击，从而获得服务器权限进入内网。<br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/db821778f6b80c3cca6995131bf5b314b03e3f8cb18d4d8ac0cc971e4b437cf4/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696e666f2e706e67"><img src="https://camo.githubusercontent.com/db821778f6b80c3cca6995131bf5b314b03e3f8cb18d4d8ac0cc971e4b437cf4/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f696e666f2e706e67" alt="微步信息" data-canonical-src="https://ClaudeRead.github.io/Images/info.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c1f21d62b385840ee1fad16ddd331df75dee4322839ef43fb61639dad3ec4ca9/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f66696c6561747461636b2e706e67"><img src="https://camo.githubusercontent.com/c1f21d62b385840ee1fad16ddd331df75dee4322839ef43fb61639dad3ec4ca9/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f66696c6561747461636b2e706e67" alt="恶意文件信息" data-canonical-src="https://ClaudeRead.github.io/Images/fileattack.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/51b3acfea60dad11bb690777eb65ad6e385dcb1ae95ee0d212507edfac221d9b/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f76697065722e706e67"><img src="https://camo.githubusercontent.com/51b3acfea60dad11bb690777eb65ad6e385dcb1ae95ee0d212507edfac221d9b/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f76697065722e706e67" alt="Viper" data-canonical-src="https://ClaudeRead.github.io/Images/viper.png" style="max-width: 100%;"></a><br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/e297466ace51b4bf560984d03ab60a834f78509ee8180747b3c2837b30ecadcb/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f61726c2e706e67"><img src="https://camo.githubusercontent.com/e297466ace51b4bf560984d03ab60a834f78509ee8180747b3c2837b30ecadcb/68747470733a2f2f436c61756465526561642e6769746875622e696f2f496d616765732f61726c2e706e67" alt="ARL" data-canonical-src="https://ClaudeRead.github.io/Images/arl.png" style="max-width: 100%;"></a></p>
-<h4>抑制和根除阶段</h4>
-<ol>
-<li>对恶意文件进行删除</li>
-<li>防火墙添封禁外联IP</li>
-<li>对涉及主机进行杀毒</li>
-<li>对漏洞进行修补</li>
-</ol>
+<div class="markdown-body" id="postBody"><p>  这一年一半记忆在电脑上，一半的记忆在学校，拿了三个无关痛痒的红本本，也没有太多惊喜。这一年见过了大灾之后的人间温暖，也见过了什么叫“上流生活”。</p>
+<p>  2020年注定是难以忘却的一年，前半年多数时间跟电脑度过，用代码写了一些奇奇怪怪的东西，在探究的过程中我渐渐发现代码对于我来说只是工具，有趣的人能拿代码造出有趣的轮子，无趣的人用代码也只能造出千篇一律的轮子，终究探明唯有热爱，才能让代码活灵活现，才能真正做到技术改变学习生活，虽然自己的技术才只是起步。</p>
+<p>  后半年的记忆不是在做课设就是在做课设的路上，人生第一个通宵竟然是为了做课设，高考都浪过的人竟然会被一门门课设弄到熬夜肝，想想都觉得不可思议。讲真，我也有些侥幸自己会一点代码，要不是代码我课设效率注定差到离谱（四五十行代码将一门课设效率直线提高那感觉老爽了）临期期末又熬夜做大创的项目，又是第一次将一个纸面上的想法通过连肝四天三夜转变为一个现实的程序，体验的到了半开发的乐趣和痛苦。</p>
+<p>  这一年我也在探索马上进入社会自己到底想要什么想要过怎样的生活，当我去了腾讯的一个活动见识了各行各业的大佬我当场就知道这才是我想要的，这一年我也逐步认识自己，每个人的剧本都不一样，可能我的剧本就是这样，我无法去选择好的剧本，所以我只能尽心尽责去演好我在这个剧本里的角色，以前我总会羡慕别人但是现在不会了。因为我的剧本也会有自己高光的时候，只是“剧情”还没到罢了还需要前期不断的铺垫。我依旧很喜欢那句话“恋爱就是一个不断认识自己的过程”所以我也去慢慢改变不断打磨，与其让别人适应你还不如自己根据自己的特点去适应别人。亲身经历下来我也探究到自己最不喜欢那种暖味不清，纠缠不清依旧喜欢那种坦坦荡荡，坦然，相互喜欢的感情。</p>
+<p>  综上所述该翻篇的翻篇，该重来的重来，努力学习，努力生活，积极改变，积极面对，对的继续做下去，错的重头在来，仗着年轻不断试错，错了再改又有何妨！</p>
+<p>  2020再见啦！！！<br>
+  你好，2021！！！</p>
 </div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
 
