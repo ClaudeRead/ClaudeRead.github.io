@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Fri, 20 Mar 2026 06:48:34 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>讲义生成系统小记</title><link>https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</link><description>## ⚙️ 说明&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Fri, 20 Mar 2026 17:56:15 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>讲义生成系统小记</title><link>https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</link><description>## ⚙️ 说明&#13;
 &#13;
 &amp;emsp;&amp;emsp;最近用AI大模型尝试开发了一个讲义生成系统，这个系统尝试解决如下这个情况：&#13;
 - 本地有一个知识库，如果现在去做一个培训，恰好培训的内容是你在知识库当中平时记录的内容，现在需要将知识库中记录的笔记转化成讲义。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</guid><pubDate>Fri, 20 Mar 2026 06:48:06 +0000</pubDate></item><item><title>SRC中逻辑漏洞总结</title><link>https://ClaudeRead.github.io/post/SRC-zhong-luo-ji-lou-dong-zong-jie.html</link><description>### 备注：以下内容有些源自网络。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/SRC-zhong-luo-ji-lou-dong-zong-jie.html</guid><pubDate>Fri, 20 Mar 2026 02:35:08 +0000</pubDate></item><item><title>Rust学习记录(一)</title><link>https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-yi-%29.html</link><description># Rust基础部分的语法问题记录
@@ -267,50 +267,7 @@ cat /etc/shadow
 awk -F: '$3==0{print $1}' /etc/passwd
 cat /etc/passwd | grep x:0
 ```
-### 查看当前登录用户，以及其登录ip。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Linux-ying-ji-xiang-ying-shi-xiang-guan-ming-ling.html</guid><pubDate>Fri, 20 Mar 2026 01:40:54 +0000</pubDate></item><item><title>关于ClaudeRead</title><link>https://ClaudeRead.github.io/post/guan-yu-ClaudeRead.html</link><description>### 👋 嗨，你好呀！
-
-欢迎来到我的小站！这里是我在互联网上的一方小天地 🌿
----
-
-### 🎯 关于我
-
-一个网络名称瞎起，科技树乱点、只会拆不会装、喜欢东瞅瞅西看看、臭打游戏的乙方崽 💻
-
-这是我从ReadPond这个账户上迁移过来的，ReadPond因为被标记导致无法直接迁移，所以只能另起炉灶😭😭😭
-
-- 🔭 目前正在学习和探索：渗透测试、应急响应、数据合规、AI.........
-- 🌱 正在成长的路上，不断学习新知识
-- 💬 喜欢分享技术心得和生活感悟
-- 📚 热爱阅读，偶尔写写文章
-- 🎮 闲暇时喜欢打游戏、听音乐、看电影
----
-
-### 🎨 关于这个博客
-
-这个博客使用 **Gmeek** 搭建，基于 GitHub Issues，简洁又高效 (疯狂安利！！！)✨
-
-- 📝 所有文章都写在 Issues 里
-- 🎨 主题简洁清新，专注于内容
-- 🚀 部署在 GitHub Pages，免费又稳定
-- 💡 支持评论、搜索、标签等功能
-
-博客主要用于记录：
-- 🔧 技术学习笔记
-- 💭 生活感悟与思考
-- 📚 读书心得与书评
-- 🎮 兴趣爱好分享
----
-
-### ✨ 座右铭
-
-&gt; 生活不止眼前的代码，还有诗和远方 🌈
-
----
-
-
-*感谢你的访问！希望你能在这个数字时代留下属于自己独属的印记 😊**
-
-&lt;!-- ##{'timestamp':1771992720}## --&gt;。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/guan-yu-ClaudeRead.html</guid><pubDate>Thu, 19 Mar 2026 15:20:38 +0000</pubDate></item><item><title>SSRF漏洞</title><link>https://ClaudeRead.github.io/post/SSRF-lou-dong.html</link><description>### SSRF
+### 查看当前登录用户，以及其登录ip。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Linux-ying-ji-xiang-ying-shi-xiang-guan-ming-ling.html</guid><pubDate>Fri, 20 Mar 2026 01:40:54 +0000</pubDate></item><item><title>SSRF漏洞</title><link>https://ClaudeRead.github.io/post/SSRF-lou-dong.html</link><description>### SSRF
 
 &amp;emsp;&amp;emsp;Server-Slde Request Forgery：服务器端请求伪造。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/SSRF-lou-dong.html</guid><pubDate>Thu, 19 Mar 2026 15:14:19 +0000</pubDate></item><item><title>关于这段时间AI的使用思考</title><link>https://ClaudeRead.github.io/post/guan-yu-zhe-duan-shi-jian-AI-de-shi-yong-si-kao.html</link><description>&amp;emsp;&amp;emsp;从DeepSeek火爆的时候我开始正式接触AI，了解过一些底层原理，但是也仅限于知道是怎么回事，在往下就没有细究了，更多的是在探索怎么结合AI让我学习工作效率更高。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/guan-yu-zhe-duan-shi-jian-AI-de-shi-yong-si-kao.html</guid><pubDate>Mon, 09 Mar 2026 15:22:56 +0000</pubDate></item><item><title>生活随笔(四)</title><link>https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-si-%29.html</link><description>&amp;emsp;&amp;emsp;2026年新年快乐！！！！祝互联网的常驻民们平平安安！！！🙏🙏🙏
 &amp;emsp;&amp;emsp;该说不说，重庆渝东巫山、巫溪、奉节、万州这几个地方真的不错，尤其是巫山和奉节，奉节的脐橙真的巨甜😋😋😋疯狂安利一波~~~~，还有万州的格格，这格格类似与陕西的粉蒸肉(虽然我看B站上的评论区说这俩实际上不太一样，但是....真的看起来都差不多)😋😋😋万州的杂酱面也好吃，这地方好吃的不少，价格也比其他地方便宜好多。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-si-%29.html</guid><pubDate>Wed, 18 Feb 2026 04:12:00 +0000</pubDate></item><item><title>ISO27001-风险评估工作记录</title><link>https://ClaudeRead.github.io/post/ISO27001--feng-xian-ping-gu-gong-zuo-ji-lu.html</link><description>&amp;emsp;&amp;emsp;综述：在ISO 27001中，核心是风险评估，但是GB/T 20984-2022《信息安全技术 信息安全风险评估方法》也是风险评估。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ISO27001--feng-xian-ping-gu-gong-zuo-ji-lu.html</guid><pubDate>Wed, 17 Dec 2025 01:21:22 +0000</pubDate></item><item><title>等保相关内容学习记录(一)</title><link>https://ClaudeRead.github.io/post/deng-bao-xiang-guan-nei-rong-xue-xi-ji-lu-%28-yi-%29.html</link><description>#### 一、什么是等保&#13;
