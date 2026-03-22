@@ -1,5 +1,123 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Fri, 20 Mar 2026 17:56:15 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>讲义生成系统小记</title><link>https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</link><description>## ⚙️ 说明&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Sun, 22 Mar 2026 02:22:55 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>网络安全知识库小记</title><link>https://ClaudeRead.github.io/post/wang-luo-an-quan-zhi-shi-ku-xiao-ji.html</link><description>## 功能特性
+
+- **漏洞检索** - 支持 CVE 编号和关键词搜索，快速定位漏洞信息
+- **漏洞分析** - 结构化展示 CVSS 评分、攻击向量、影响范围
+- **POC 资源** - 自动聚合 GitHub、Exploit-DB 等平台的 POC 资源
+- **应急响应** - 文章体系，支持 Markdown 博客式展示
+- **数据同步** - 自动从 NVD API 增量同步漏洞数据
+- **全文搜索** - SQLite FTS5 全文搜索引擎
+- **离线运行** - SQLite 单文件数据库，无需外部依赖
+
+## 技术栈
+
+| 组件 | 技术选型 |
+|------|----------|
+| 后端框架 | Rust + Axum |
+| 数据库 | SQLite + FTS5 |
+| ORM | sqlx |
+| 模板引擎 | Askama |
+| Markdown | pulldown-cmark |
+| HTTP 客户端 | reqwest |
+| 异步运行时 | tokio |
+
+## 项目结构
+
+```
+Cybersecurity_Knowledge_Base/
+├── Cargo.toml                    # 项目配置和依赖
+├── .env                          # 环境变量配置
+├── migrations/
+│   └── 20240101000000_init.sql   # 数据库迁移脚本
+├── src/
+│   ├── main.rs                   # 主程序入口
+│   ├── model/
+│   │   └── mod.rs                # 数据模型定义
+│   ├── db/
+│   │   └── mod.rs                # 数据库操作层
+│   ├── parser/
+│   │   └── mod.rs                # NVD API 数据解析器
+│   ├── sync/
+│   │   └── mod.rs                # 数据同步模块
+│   ├── service/
+│   │   └── mod.rs                # 业务逻辑层
+│   └── api/
+│       ├── mod.rs                # API 模块声明
+│       ├── pages.rs              # 页面路由
+│       ├── vulnerabilities.rs    # 漏洞 API
+│       ├── poc.rs                # POC API
+│       ├── search.rs             # 搜索 API
+│       └── articles.rs           # 文章 API
+├── templates/                    # Askama HTML 模板
+│   ├── base.html                 # 基础模板
+│   ├── index.html                # 首页
+│   ├── vulnerabilities.html      # 漏洞列表页
+│   ├── vulnerability_detail.html # 漏洞详情页
+│   ├── articles.html             # 文章列表页
+│   └── article_detail.html       # 文章详情页
+├── static/
+│   ├── css/
+│   │   └── style.css             # 样式文件
+│   └── js/
+│       └── main.js               # 交互逻辑
+├── content/                      # 用户上传的 Markdown 文档
+└── knowledge_base.db             # SQLite 数据库文件
+```
+
+## 快速开始
+
+### 环境要求
+
+- Rust 1.70+
+- NVD API Key（可选，但强烈推荐）
+
+### 安装步骤
+
+1. **克隆项目**
+
+```bash
+git clone https://github.com/your-username/Cybersecurity_Knowledge_Base.git
+cd Cybersecurity_Knowledge_Base
+```
+
+2. **配置环境变量**
+
+编辑 `.env` 文件：
+
+```env
+DATABASE_URL=sqlite://knowledge_base.db?mode=rwc
+RUST_LOG=info
+NVD_API_KEY=your_api_key_here
+```
+
+&gt; **获取 NVD API Key**：访问 [NVD API 官网](https://nvd.nist.gov/developers/request-an-api-key) 申请免费 API Key
+
+3. **编译运行**
+
+```bash
+cargo run
+```
+
+4. **访问系统**
+
+浏览器打开 `http://localhost:3000`
+
+## 配置说明
+
+### 环境变量
+
+| 变量名 | 必填 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `DATABASE_URL` | 否 | `sqlite://knowledge_base.db?mode=rwc` | SQLite 数据库连接字符串 |
+| `RUST_LOG` | 否 | `info` | 日志级别 (error/warn/info/debug/trace) |
+| `NVD_API_KEY` | 否 | 无 | NVD API 密钥（无 Key 限制请求频率） |
+
+### NVD API 速率限制
+
+- **无 API Key**：每 30 秒 5 个请求
+- **有 API Key**：每 30 秒 50 个请求
+
+建议申请 API Key 以获得更快的数据同步速度。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/wang-luo-an-quan-zhi-shi-ku-xiao-ji.html</guid><pubDate>Sun, 22 Mar 2026 02:22:22 +0000</pubDate></item><item><title>讲义生成系统小记</title><link>https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</link><description>## ⚙️ 说明&#13;
 &#13;
 &amp;emsp;&amp;emsp;最近用AI大模型尝试开发了一个讲义生成系统，这个系统尝试解决如下这个情况：&#13;
 - 本地有一个知识库，如果现在去做一个培训，恰好培训的内容是你在知识库当中平时记录的内容，现在需要将知识库中记录的笔记转化成讲义。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</guid><pubDate>Fri, 20 Mar 2026 06:48:06 +0000</pubDate></item><item><title>SRC中逻辑漏洞总结</title><link>https://ClaudeRead.github.io/post/SRC-zhong-luo-ji-lou-dong-zong-jie.html</link><description>### 备注：以下内容有些源自网络。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/SRC-zhong-luo-ji-lou-dong-zong-jie.html</guid><pubDate>Fri, 20 Mar 2026 02:35:08 +0000</pubDate></item><item><title>Rust学习记录(一)</title><link>https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-yi-%29.html</link><description># Rust基础部分的语法问题记录
