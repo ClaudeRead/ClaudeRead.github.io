@@ -79,7 +79,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <div id="content">
 <div class="markdown-body" id="postBody"><h3>SSRF</h3>
 <p>  Server-Slde Request Forgery：服务器端请求伪造。是一种由攻击者构造特殊形式的请求，并且由指定服务器端发起的恶意请求的一个安全漏洞，由于业务运行的服务器处于内外网边界，并且可通过利用当前这台服务器根据所在的网络，访问到与外部网路隔离的内网应用，所以一般情况下，SSRF漏洞攻击目标是攻击者无法直接访问的内网系统</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/c216a46b-e932-4130-a81e-64a7f5bcf73e"><img width="934" height="545" alt="Image" src="https://github.com/user-attachments/assets/c216a46b-e932-4130-a81e-64a7f5bcf73e" style="max-width: 100%; height: auto; max-height: 545px;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/c216a46b-e932-4130-a81e-64a7f5bcf73e"><img width="934" height="545" alt="Image" src="https://github.com/user-attachments/assets/c216a46b-e932-4130-a81e-64a7f5bcf73e" style="max-width: 100%; height: auto; max-height: 545px;; aspect-ratio: 934 / 545; background-color: var(--bgColor-muted); border-radius: 6px; display: block" class="js-gh-image-fallback"></a></p>
 <p>目标：从外网无法访问到内部系统<br>
 原因：由于服务器提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制</p>
 <h4>如何挖掘：</h4>
@@ -145,7 +145,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     - 防御检测代码会首先请求一次域名，判断Ip地址是否是白名单<br>
     - DNS服务器在收到首次请求的时候，返回允许的IP地址<br>
     - 防御检测代码执行后，服务器真正发起DNS请求，请求资源，此时DNS记录以0毫秒的延迟(TTL=0)，修改IP地址为127.0.0.1达到绕过SSRF防护的作用</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/cf1acf96-b390-4e07-8013-8de254267206"><img width="874" height="330" alt="Image" src="https://github.com/user-attachments/assets/cf1acf96-b390-4e07-8013-8de254267206" style="max-width: 100%; height: auto; max-height: 330px;"></a></p></div>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/cf1acf96-b390-4e07-8013-8de254267206"><img width="874" height="330" alt="Image" src="https://github.com/user-attachments/assets/cf1acf96-b390-4e07-8013-8de254267206" style="max-width: 100%; height: auto; max-height: 330px;; aspect-ratio: 874 / 330; background-color: var(--bgColor-muted); border-radius: 6px; display: block" class="js-gh-image-fallback"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
