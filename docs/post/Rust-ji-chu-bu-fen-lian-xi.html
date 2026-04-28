@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/252286375?v=4&size=64"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="实验内容：使用Rust语言，做一个学生管理系统的Demo
+
+实验功能：
+&emsp;1. 设置欢迎界面
+&emsp;2. 要求需要对用户输入进行检查
+&emsp;3. 功能模块划分为：
+&emsp;&emsp;a. 第一选项为显示所有学生
+&emsp;&emsp;b. 第二选项为增加学生
+&emsp;&emsp;&emsp;- 内容：姓名、年龄、班级
+&emsp;&emsp;c. 第三选项为删除学生
+&emsp;&emsp;&emsp;- 先显示全部学生
+&emsp;&emsp;&emsp;- 通过指定序号进行删除
+&emsp;&emsp;d. 第四选项为查找指定学生
+&emsp;&emsp;&emsp;- 根据姓名查找学生，显示匹配的学生信息
+&emsp;&emsp;e. 第五选项为退出系统
+
+备注：需要对代码进行添加注释
+
+#### 主界面
+```rust
+let mut students: Vec<(String, u8, String)> = Vec::new();  
+  
+// loop 是一个无限循环，会一直执行直到遇到 break 语句  
+// 这是程序的主循环，用于持续显示菜单和处理用户操作  
+loop {  
+    println!('***学 生 管 理 系 统***');  
+    println!('1.显示所有学生');  
+    println!('2.增加学生');  
+    println!('3.删除学生');  
+    println!('4.查找指定学生');  
+    println!('5.退出');  
+    println!('==========================');  
+    println!('请选择操作 (1-5): ');  
+  
+    // 创建一个空的字符串变量，用于存储用户的输入  
+    // String::new() 创建一个新的空字符串  
+    let mut choice = String::new();  
+      
+    // std::io::stdin() 获取标准输入（键盘输入）  
+    // .read_line(&mut choice) 读取一行输入并存储到 choice 变量中  
+    // &mut choice 表示传递 choice 的可变引用，允许函数修改它  
+    // .expect('输入参数有误，请重新输入') 如果读取失败，显示错误信息并终止程序  
+    std::io::stdin()  
+        .read_line(&mut choice)  
+        .expect('输入参数有误，请重新输入');  
+  
+    // ==================== 输入验证部分 ====================    
+    // choice.trim() 去除字符串两端的空白字符（包括换行符）  
+    // .parse() 尝试将字符串解析为数字  
+    // match 是 Rust 的模式匹配，类似于其他语言的 switch-case    
+    // Ok(num) 表示解析成功，num 是解析出的数字  
+    // Err(_) 表示解析失败，_ 表示忽略错误的具体信息  
+    let choice: u32 = match choice.trim().parse() {  
+        Ok(num) => num,  // 解析成功，使用解析出的数字  
+        Err(_) => {  
+            println!('waring: 请输入数字！');  
+            continue;  // 跳过本次循环的剩余部分，直接开始下一次循环  
+        }  
+    };  
+  
+    // ==================== 根据用户选择执行操作 ====================    
+    if choice == 1 {  
+        // 调用显示所有学生的函数  
+        // &mut students 传递 students 的可变引用  
+        // 虽然显示函数不需要修改数据，但为了与其他函数保持一致性  
+        show_all_students(&mut students);  
+    } else if choice == 2 {  
+        // 调用添加学生的函数  
+        add_student(&mut students);  
+    } else if choice == 3 {  
+        // 调用删除学生的函数  
+        delete_student(&mut students);  
+    } else if choice == 4 {  
+        // 调用查找学生的函数  
+        find_student(&mut students);  
+    } else if choice == 5 {  
+        // 用户选择退出  
+        println!('感谢使用学生管理系统，再见！');  
+        break;  // break 语句跳出循环，结束程序  
+    } else {  
+        // 用户输入了无效的选项  
+        println!('无效的选择，请重新输入！');  
+    }  
+    // 循环结束，继续下一次迭代，重新显示菜单  
+}
+```
+
+#### 添加学生功能
+```rust
+fn add_student(students: &mut Vec<(String, u8, String)>) {  
+    // 打印功能标题，\n 表示换行  
+    println!('\n---添加学生---');  
+  
+    // ==================== 输入学生姓名 ====================    
+      
+    // 创建一个空字符串用于存储姓名输入  
+    let mut name = String::new();  
+      
+    // 读取用户输入的一行文本到 name 变量中  
+    std::io::stdin()  
+        .read_line(&mut name)  
+        .expect('无法读取');  
+      
+    // trim() 去除字符串两端的空白字符（包括用户按回车产生的换行符）  
+    // to_string() 将字符串切片转换为 String 类型  
+    // 这样处理后，name 就是一个干净的字符串，没有多余的空白  
+    let name = name.trim().to_string();  
+  
+    // ==================== 输入学生年龄 ====================    
+      
+    // 创建一个空字符串用于存储年龄输入  
+    // 注意：用户输入的是文本，需要转换为数字  
+    let mut age_str = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&mut age_str)  
+        .expect('无法读取输入');  
+      
+    // 尝试将字符串转换为 u8 类型的数字（0-255）  
+    // match 进行模式匹配，判断转换是否成功  
+    let age: u8 = match age_str.trim().parse() {  
+        Ok(num) => num,  // 转换成功，使用转换后的数字  
+        Err(_) => {  
+            // 转换失败，说明用户输入的不是数字  
+            println!('年龄必须为数字！添加失败！！！');  
+            return;  // return 提前退出函数，不执行后面的代码  
+        }  
+    };  
+  
+    // ==================== 输入学生班级 ====================    
+    // 创建一个空字符串用于存储班级输入  
+    let mut class_name = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&mut class_name)  
+        .expect('无法读取');  
+      
+    // 去除空白字符并转换为 String 类型  
+    let class_name = class_name.trim().to_string();  
+  
+    // ==================== 将学生信息添加到列表 ====================    
+    // students.push() 向动态数组的末尾添加一个元素  
+    // (name, age, class_name) 创建一个元组，包含三个数据  
+    // 元组的顺序对应：(姓名: String, 年龄: u8, 班级: String)  
+    students.push((name, age, class_name));  
+      
+    // 函数结束，学生信息已成功添加到列表中  
+}
+
+```
+
+#### 删除学生
+```rust
+fn delete_student(students: &mut Vec<(String, u8, String)>) {  
+    println!('\n--- 删除学生 ---');  
+  
+    // ==================== 检查列表是否为空 ====================    
+    
+    // students.is_empty() 检查动态数组是否为空  
+    if students.is_empty() {  
+        println!('暂无学生数据。">
+<meta property="og:title" content="Rust基础部分练习">
+<meta property="og:description" content="实验内容：使用Rust语言，做一个学生管理系统的Demo
+
+实验功能：
+&emsp;1. 设置欢迎界面
+&emsp;2. 要求需要对用户输入进行检查
+&emsp;3. 功能模块划分为：
+&emsp;&emsp;a. 第一选项为显示所有学生
+&emsp;&emsp;b. 第二选项为增加学生
+&emsp;&emsp;&emsp;- 内容：姓名、年龄、班级
+&emsp;&emsp;c. 第三选项为删除学生
+&emsp;&emsp;&emsp;- 先显示全部学生
+&emsp;&emsp;&emsp;- 通过指定序号进行删除
+&emsp;&emsp;d. 第四选项为查找指定学生
+&emsp;&emsp;&emsp;- 根据姓名查找学生，显示匹配的学生信息
+&emsp;&emsp;e. 第五选项为退出系统
+
+备注：需要对代码进行添加注释
+
+#### 主界面
+```rust
+let mut students: Vec<(String, u8, String)> = Vec::new();  
+  
+// loop 是一个无限循环，会一直执行直到遇到 break 语句  
+// 这是程序的主循环，用于持续显示菜单和处理用户操作  
+loop {  
+    println!('***学 生 管 理 系 统***');  
+    println!('1.显示所有学生');  
+    println!('2.增加学生');  
+    println!('3.删除学生');  
+    println!('4.查找指定学生');  
+    println!('5.退出');  
+    println!('==========================');  
+    println!('请选择操作 (1-5): ');  
+  
+    // 创建一个空的字符串变量，用于存储用户的输入  
+    // String::new() 创建一个新的空字符串  
+    let mut choice = String::new();  
+      
+    // std::io::stdin() 获取标准输入（键盘输入）  
+    // .read_line(&mut choice) 读取一行输入并存储到 choice 变量中  
+    // &mut choice 表示传递 choice 的可变引用，允许函数修改它  
+    // .expect('输入参数有误，请重新输入') 如果读取失败，显示错误信息并终止程序  
+    std::io::stdin()  
+        .read_line(&mut choice)  
+        .expect('输入参数有误，请重新输入');  
+  
+    // ==================== 输入验证部分 ====================    
+    // choice.trim() 去除字符串两端的空白字符（包括换行符）  
+    // .parse() 尝试将字符串解析为数字  
+    // match 是 Rust 的模式匹配，类似于其他语言的 switch-case    
+    // Ok(num) 表示解析成功，num 是解析出的数字  
+    // Err(_) 表示解析失败，_ 表示忽略错误的具体信息  
+    let choice: u32 = match choice.trim().parse() {  
+        Ok(num) => num,  // 解析成功，使用解析出的数字  
+        Err(_) => {  
+            println!('waring: 请输入数字！');  
+            continue;  // 跳过本次循环的剩余部分，直接开始下一次循环  
+        }  
+    };  
+  
+    // ==================== 根据用户选择执行操作 ====================    
+    if choice == 1 {  
+        // 调用显示所有学生的函数  
+        // &mut students 传递 students 的可变引用  
+        // 虽然显示函数不需要修改数据，但为了与其他函数保持一致性  
+        show_all_students(&mut students);  
+    } else if choice == 2 {  
+        // 调用添加学生的函数  
+        add_student(&mut students);  
+    } else if choice == 3 {  
+        // 调用删除学生的函数  
+        delete_student(&mut students);  
+    } else if choice == 4 {  
+        // 调用查找学生的函数  
+        find_student(&mut students);  
+    } else if choice == 5 {  
+        // 用户选择退出  
+        println!('感谢使用学生管理系统，再见！');  
+        break;  // break 语句跳出循环，结束程序  
+    } else {  
+        // 用户输入了无效的选项  
+        println!('无效的选择，请重新输入！');  
+    }  
+    // 循环结束，继续下一次迭代，重新显示菜单  
+}
+```
+
+#### 添加学生功能
+```rust
+fn add_student(students: &mut Vec<(String, u8, String)>) {  
+    // 打印功能标题，\n 表示换行  
+    println!('\n---添加学生---');  
+  
+    // ==================== 输入学生姓名 ====================    
+      
+    // 创建一个空字符串用于存储姓名输入  
+    let mut name = String::new();  
+      
+    // 读取用户输入的一行文本到 name 变量中  
+    std::io::stdin()  
+        .read_line(&mut name)  
+        .expect('无法读取');  
+      
+    // trim() 去除字符串两端的空白字符（包括用户按回车产生的换行符）  
+    // to_string() 将字符串切片转换为 String 类型  
+    // 这样处理后，name 就是一个干净的字符串，没有多余的空白  
+    let name = name.trim().to_string();  
+  
+    // ==================== 输入学生年龄 ====================    
+      
+    // 创建一个空字符串用于存储年龄输入  
+    // 注意：用户输入的是文本，需要转换为数字  
+    let mut age_str = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&mut age_str)  
+        .expect('无法读取输入');  
+      
+    // 尝试将字符串转换为 u8 类型的数字（0-255）  
+    // match 进行模式匹配，判断转换是否成功  
+    let age: u8 = match age_str.trim().parse() {  
+        Ok(num) => num,  // 转换成功，使用转换后的数字  
+        Err(_) => {  
+            // 转换失败，说明用户输入的不是数字  
+            println!('年龄必须为数字！添加失败！！！');  
+            return;  // return 提前退出函数，不执行后面的代码  
+        }  
+    };  
+  
+    // ==================== 输入学生班级 ====================    
+    // 创建一个空字符串用于存储班级输入  
+    let mut class_name = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&mut class_name)  
+        .expect('无法读取');  
+      
+    // 去除空白字符并转换为 String 类型  
+    let class_name = class_name.trim().to_string();  
+  
+    // ==================== 将学生信息添加到列表 ====================    
+    // students.push() 向动态数组的末尾添加一个元素  
+    // (name, age, class_name) 创建一个元组，包含三个数据  
+    // 元组的顺序对应：(姓名: String, 年龄: u8, 班级: String)  
+    students.push((name, age, class_name));  
+      
+    // 函数结束，学生信息已成功添加到列表中  
+}
+
+```
+
+#### 删除学生
+```rust
+fn delete_student(students: &mut Vec<(String, u8, String)>) {  
+    println!('\n--- 删除学生 ---');  
+  
+    // ==================== 检查列表是否为空 ====================    
+    
+    // students.is_empty() 检查动态数组是否为空  
+    if students.is_empty() {  
+        println!('暂无学生数据。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/Rust-ji-chu-bu-fen-lian-xi.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
+<title>Rust基础部分练习</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">Rust基础部分练习</h1>
+<div class="title-right">
+    <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/30" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>实验内容：使用Rust语言，做一个学生管理系统的Demo</p>
+<p>实验功能：<br>
+ 1. 设置欢迎界面<br>
+ 2. 要求需要对用户输入进行检查<br>
+ 3. 功能模块划分为：<br>
+  a. 第一选项为显示所有学生<br>
+  b. 第二选项为增加学生<br>
+   - 内容：姓名、年龄、班级<br>
+  c. 第三选项为删除学生<br>
+   - 先显示全部学生<br>
+   - 通过指定序号进行删除<br>
+  d. 第四选项为查找指定学生<br>
+   - 根据姓名查找学生，显示匹配的学生信息<br>
+  e. 第五选项为退出系统</p>
+<p>备注：需要对代码进行添加注释</p>
+<h4>主界面</h4>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-k">let</span> <span class="pl-k">mut</span> students<span class="pl-kos">:</span> <span class="pl-smi">Vec</span><span class="pl-kos">&lt;</span><span class="pl-kos">(</span><span class="pl-smi">String</span><span class="pl-kos">,</span> <span class="pl-smi">u8</span><span class="pl-kos">,</span> <span class="pl-smi">String</span><span class="pl-kos">)</span><span class="pl-kos">&gt;</span> = <span class="pl-smi">Vec</span><span class="pl-kos">::</span><span class="pl-en">new</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+<span class="pl-c">// loop 是一个无限循环，会一直执行直到遇到 break 语句  </span>
+<span class="pl-c">// 这是程序的主循环，用于持续显示菜单和处理用户操作  </span>
+<span class="pl-k">loop</span> <span class="pl-kos">{</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"***学 生 管 理 系 统***"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"1.显示所有学生"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"2.增加学生"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"3.删除学生"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"4.查找指定学生"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"5.退出"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"=========================="</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"请选择操作 (1-5): "</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// 创建一个空的字符串变量，用于存储用户的输入  </span>
+    <span class="pl-c">// String::new() 创建一个新的空字符串  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> choice = <span class="pl-smi">String</span><span class="pl-kos">::</span><span class="pl-en">new</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// std::io::stdin() 获取标准输入（键盘输入）  </span>
+    <span class="pl-c">// .read_line(&amp;mut choice) 读取一行输入并存储到 choice 变量中  </span>
+    <span class="pl-c">// &amp;mut choice 表示传递 choice 的可变引用，允许函数修改它  </span>
+    <span class="pl-c">// .expect("输入参数有误，请重新输入") 如果读取失败，显示错误信息并终止程序  </span>
+    std<span class="pl-kos">::</span>io<span class="pl-kos">::</span><span class="pl-en">stdin</span><span class="pl-kos">(</span><span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">read_line</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> choice<span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">expect</span><span class="pl-kos">(</span><span class="pl-s">"输入参数有误，请重新输入"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 输入验证部分 ====================    </span>
+    <span class="pl-c">// choice.trim() 去除字符串两端的空白字符（包括换行符）  </span>
+    <span class="pl-c">// .parse() 尝试将字符串解析为数字  </span>
+    <span class="pl-c">// match 是 Rust 的模式匹配，类似于其他语言的 switch-case    </span>
+    <span class="pl-c">// Ok(num) 表示解析成功，num 是解析出的数字  </span>
+    <span class="pl-c">// Err(_) 表示解析失败，_ 表示忽略错误的具体信息  </span>
+    <span class="pl-k">let</span> choice<span class="pl-kos">:</span> <span class="pl-smi">u32</span> = <span class="pl-k">match</span> choice<span class="pl-kos">.</span><span class="pl-en">trim</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">parse</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+        <span class="pl-v">Ok</span><span class="pl-kos">(</span>num<span class="pl-kos">)</span> =&gt; num<span class="pl-kos">,</span>  <span class="pl-c">// 解析成功，使用解析出的数字  </span>
+        <span class="pl-v">Err</span><span class="pl-kos">(</span>_<span class="pl-kos">)</span> =&gt; <span class="pl-kos">{</span>  
+            <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"waring: 请输入数字！"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+            <span class="pl-k">continue</span><span class="pl-kos">;</span>  <span class="pl-c">// 跳过本次循环的剩余部分，直接开始下一次循环  </span>
+        <span class="pl-kos">}</span>  
+    <span class="pl-kos">}</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 根据用户选择执行操作 ====================    </span>
+    <span class="pl-k">if</span> choice == <span class="pl-c1">1</span> <span class="pl-kos">{</span>  
+        <span class="pl-c">// 调用显示所有学生的函数  </span>
+        <span class="pl-c">// &amp;mut students 传递 students 的可变引用  </span>
+        <span class="pl-c">// 虽然显示函数不需要修改数据，但为了与其他函数保持一致性  </span>
+        <span class="pl-en">show_all_students</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> students<span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-k">if</span> choice == <span class="pl-c1">2</span> <span class="pl-kos">{</span>  
+        <span class="pl-c">// 调用添加学生的函数  </span>
+        <span class="pl-en">add_student</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> students<span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-k">if</span> choice == <span class="pl-c1">3</span> <span class="pl-kos">{</span>  
+        <span class="pl-c">// 调用删除学生的函数  </span>
+        <span class="pl-en">delete_student</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> students<span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-k">if</span> choice == <span class="pl-c1">4</span> <span class="pl-kos">{</span>  
+        <span class="pl-c">// 调用查找学生的函数  </span>
+        <span class="pl-en">find_student</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> students<span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-k">if</span> choice == <span class="pl-c1">5</span> <span class="pl-kos">{</span>  
+        <span class="pl-c">// 用户选择退出  </span>
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"感谢使用学生管理系统，再见！"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+        <span class="pl-k">break</span><span class="pl-kos">;</span>  <span class="pl-c">// break 语句跳出循环，结束程序  </span>
+    <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-kos">{</span>  
+        <span class="pl-c">// 用户输入了无效的选项  </span>
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"无效的选择，请重新输入！"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span>  
+    <span class="pl-c">// 循环结束，继续下一次迭代，重新显示菜单  </span>
+<span class="pl-kos">}</span></pre></div>
+<h4>添加学生功能</h4>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-k">fn</span> <span class="pl-en">add_student</span><span class="pl-kos">(</span><span class="pl-s1">students</span><span class="pl-kos">:</span> <span class="pl-c1">&amp;</span><span class="pl-k">mut</span> <span class="pl-smi">Vec</span><span class="pl-kos">&lt;</span><span class="pl-kos">(</span><span class="pl-smi">String</span><span class="pl-kos">,</span> <span class="pl-smi">u8</span><span class="pl-kos">,</span> <span class="pl-smi">String</span><span class="pl-kos">)</span><span class="pl-kos">&gt;</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+    <span class="pl-c">// 打印功能标题，\n 表示换行  </span>
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"<span class="pl-cce">\n</span>---添加学生---"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 输入学生姓名 ====================    </span>
+      
+    <span class="pl-c">// 创建一个空字符串用于存储姓名输入  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> name = <span class="pl-smi">String</span><span class="pl-kos">::</span><span class="pl-en">new</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 读取用户输入的一行文本到 name 变量中  </span>
+    std<span class="pl-kos">::</span>io<span class="pl-kos">::</span><span class="pl-en">stdin</span><span class="pl-kos">(</span><span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">read_line</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> name<span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">expect</span><span class="pl-kos">(</span><span class="pl-s">"无法读取"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// trim() 去除字符串两端的空白字符（包括用户按回车产生的换行符）  </span>
+    <span class="pl-c">// to_string() 将字符串切片转换为 String 类型  </span>
+    <span class="pl-c">// 这样处理后，name 就是一个干净的字符串，没有多余的空白  </span>
+    <span class="pl-k">let</span> name = name<span class="pl-kos">.</span><span class="pl-en">trim</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">to_string</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 输入学生年龄 ====================    </span>
+      
+    <span class="pl-c">// 创建一个空字符串用于存储年龄输入  </span>
+    <span class="pl-c">// 注意：用户输入的是文本，需要转换为数字  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> age_str = <span class="pl-smi">String</span><span class="pl-kos">::</span><span class="pl-en">new</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 读取用户输入  </span>
+    std<span class="pl-kos">::</span>io<span class="pl-kos">::</span><span class="pl-en">stdin</span><span class="pl-kos">(</span><span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">read_line</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> age_str<span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">expect</span><span class="pl-kos">(</span><span class="pl-s">"无法读取输入"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 尝试将字符串转换为 u8 类型的数字（0-255）  </span>
+    <span class="pl-c">// match 进行模式匹配，判断转换是否成功  </span>
+    <span class="pl-k">let</span> age<span class="pl-kos">:</span> <span class="pl-smi">u8</span> = <span class="pl-k">match</span> age_str<span class="pl-kos">.</span><span class="pl-en">trim</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">parse</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+        <span class="pl-v">Ok</span><span class="pl-kos">(</span>num<span class="pl-kos">)</span> =&gt; num<span class="pl-kos">,</span>  <span class="pl-c">// 转换成功，使用转换后的数字  </span>
+        <span class="pl-v">Err</span><span class="pl-kos">(</span>_<span class="pl-kos">)</span> =&gt; <span class="pl-kos">{</span>  
+            <span class="pl-c">// 转换失败，说明用户输入的不是数字  </span>
+            <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"年龄必须为数字！添加失败！！！"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+            <span class="pl-k">return</span><span class="pl-kos">;</span>  <span class="pl-c">// return 提前退出函数，不执行后面的代码  </span>
+        <span class="pl-kos">}</span>  
+    <span class="pl-kos">}</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 输入学生班级 ====================    </span>
+    <span class="pl-c">// 创建一个空字符串用于存储班级输入  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> class_name = <span class="pl-smi">String</span><span class="pl-kos">::</span><span class="pl-en">new</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 读取用户输入  </span>
+    std<span class="pl-kos">::</span>io<span class="pl-kos">::</span><span class="pl-en">stdin</span><span class="pl-kos">(</span><span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">read_line</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> class_name<span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">expect</span><span class="pl-kos">(</span><span class="pl-s">"无法读取"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 去除空白字符并转换为 String 类型  </span>
+    <span class="pl-k">let</span> class_name = class_name<span class="pl-kos">.</span><span class="pl-en">trim</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">to_string</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 将学生信息添加到列表 ====================    </span>
+    <span class="pl-c">// students.push() 向动态数组的末尾添加一个元素  </span>
+    <span class="pl-c">// (name, age, class_name) 创建一个元组，包含三个数据  </span>
+    <span class="pl-c">// 元组的顺序对应：(姓名: String, 年龄: u8, 班级: String)  </span>
+    students<span class="pl-kos">.</span><span class="pl-en">push</span><span class="pl-kos">(</span><span class="pl-kos">(</span>name<span class="pl-kos">,</span> age<span class="pl-kos">,</span> class_name<span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 函数结束，学生信息已成功添加到列表中  </span>
+<span class="pl-kos">}</span></pre></div>
+<h4>删除学生</h4>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-k">fn</span> <span class="pl-en">delete_student</span><span class="pl-kos">(</span><span class="pl-s1">students</span><span class="pl-kos">:</span> <span class="pl-c1">&amp;</span><span class="pl-k">mut</span> <span class="pl-smi">Vec</span><span class="pl-kos">&lt;</span><span class="pl-kos">(</span><span class="pl-smi">String</span><span class="pl-kos">,</span> <span class="pl-smi">u8</span><span class="pl-kos">,</span> <span class="pl-smi">String</span><span class="pl-kos">)</span><span class="pl-kos">&gt;</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"<span class="pl-cce">\n</span>--- 删除学生 ---"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 检查列表是否为空 ====================    </span>
+    
+    <span class="pl-c">// students.is_empty() 检查动态数组是否为空  </span>
+    <span class="pl-k">if</span> students<span class="pl-kos">.</span><span class="pl-en">is_empty</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"暂无学生数据。"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+        <span class="pl-k">return</span><span class="pl-kos">;</span>  <span class="pl-c">// 列表为空，直接退出函数  </span>
+    <span class="pl-kos">}</span>  
+  
+    <span class="pl-c">// ==================== 显示所有学生供用户选择 ====================    </span>
+    <span class="pl-c">// 先调用显示函数，让用户看到所有学生及其序号  </span>
+    <span class="pl-en">show_all_students</span><span class="pl-kos">(</span>students<span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 读取要删除的学生序号 ====================    </span>
+      
+    <span class="pl-c">// 创建字符串变量存储用户输入的序号  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> index_str = <span class="pl-smi">String</span><span class="pl-kos">::</span><span class="pl-en">new</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 读取用户输入  </span>
+    std<span class="pl-kos">::</span>io<span class="pl-kos">::</span><span class="pl-en">stdin</span><span class="pl-kos">(</span><span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">read_line</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> index_str<span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">expect</span><span class="pl-kos">(</span><span class="pl-s">"无法读取输入"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 将字符串转换为 usize 类型（无符号整数，用于数组索引）  </span>
+    <span class="pl-k">let</span> index<span class="pl-kos">:</span> <span class="pl-smi">usize</span> = <span class="pl-k">match</span> index_str<span class="pl-kos">.</span><span class="pl-en">trim</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">parse</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+        <span class="pl-v">Ok</span><span class="pl-kos">(</span>num<span class="pl-kos">)</span> =&gt; num<span class="pl-kos">,</span>  
+        <span class="pl-v">Err</span><span class="pl-kos">(</span>_<span class="pl-kos">)</span> =&gt; <span class="pl-kos">{</span>  
+            <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"序号必须是数字！删除失败。"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+            <span class="pl-k">return</span><span class="pl-kos">;</span>  <span class="pl-c">// 转换失败，退出函数  </span>
+        <span class="pl-kos">}</span>  
+    <span class="pl-kos">}</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 验证序号是否有效 ====================    </span>
+    <span class="pl-c">// index == 0 表示用户输入了 0，但序号从 1 开始  </span>
+    <span class="pl-c">// index &gt; students.len() 表示用户输入的序号超出了列表范围  </span>
+    <span class="pl-c">// students.len() 返回列表中元素的数量  </span>
+    <span class="pl-k">if</span> index == <span class="pl-c1">0</span> || index &gt; students<span class="pl-kos">.</span><span class="pl-en">len</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"✗ 无效的序号！删除失败。"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+        <span class="pl-k">return</span><span class="pl-kos">;</span>  <span class="pl-c">// 序号无效，退出函数  </span>
+    <span class="pl-kos">}</span>  
+  
+    <span class="pl-c">// ==================== 删除指定位置的学生 ====================    </span>
+    <span class="pl-c">// students.remove(index - 1) 删除指定位置的元素并返回它  </span>
+    <span class="pl-c">// 注意：数组索引从 0 开始，但用户看到的序号从 1 开始  </span>
+    <span class="pl-c">// 所以需要用 index - 1 来转换为实际的数组索引  </span>
+    <span class="pl-k">let</span> removed = students<span class="pl-kos">.</span><span class="pl-en">remove</span><span class="pl-kos">(</span>index - <span class="pl-c1">1</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// removed 是被删除的元组，removed.0 表示元组的第一个元素（姓名）  </span>
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"✓ 已删除学生 - 姓名: {}"</span><span class="pl-kos">,</span> removed<span class="pl-kos">.</span><span class="pl-c1">0</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+<span class="pl-kos">}</span>  </pre></div>
+<h4>查找学生</h4>
+<div class="highlight highlight-source-rust"><pre class="notranslate"> <span class="pl-k">fn</span> find_student<span class="pl-kos">(</span><span class="pl-s1">students</span><span class="pl-kos">:</span> <span class="pl-c1">&amp;</span><span class="pl-smi">Vec</span><span class="pl-kos">&lt;</span><span class="pl-kos">(</span><span class="pl-smi">String</span><span class="pl-kos">,</span> <span class="pl-smi">u8</span><span class="pl-kos">,</span> <span class="pl-smi">String</span><span class="pl-kos">)</span><span class="pl-kos">&gt;</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"<span class="pl-cce">\n</span>--- 查找学生 ---"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 检查列表是否为空 ====================    </span>
+    <span class="pl-k">if</span> students<span class="pl-kos">.</span><span class="pl-en">is_empty</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"暂无学生数据。"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+        <span class="pl-k">return</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span>  
+  
+    <span class="pl-c">// ==================== 读取要查找的学生姓名 ====================    </span>
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"请输入要查找的学生姓名: "</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 创建字符串变量存储要查找的姓名  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> search_name = <span class="pl-smi">String</span><span class="pl-kos">::</span><span class="pl-en">new</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 读取用户输入  </span>
+    std<span class="pl-kos">::</span>io<span class="pl-kos">::</span><span class="pl-en">stdin</span><span class="pl-kos">(</span><span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">read_line</span><span class="pl-kos">(</span><span class="pl-c1">&amp;</span><span class="pl-k">mut</span> search_name<span class="pl-kos">)</span>  
+        <span class="pl-kos">.</span><span class="pl-en">expect</span><span class="pl-kos">(</span><span class="pl-s">"无法读取输入"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// 去除空白字符，得到要查找的姓名  </span>
+    <span class="pl-k">let</span> search_name = search_name<span class="pl-kos">.</span><span class="pl-en">trim</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 遍历列表查找学生 ====================    </span>
+    <span class="pl-c">// 创建一个布尔变量，用于标记是否找到匹配的学生  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> found = <span class="pl-c1">false</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// for 循环遍历 students 列表中的每一个元素  </span>
+    <span class="pl-c">// student 是每次循环中的一个学生元组  </span>
+    <span class="pl-k">for</span> student <span class="pl-k">in</span> students <span class="pl-kos">{</span>  
+        <span class="pl-c">// 解构元组，将元组的三个元素分别赋值给三个变量  </span>
+        <span class="pl-c">// (name, age, class) 对应元组的三个部分  </span>
+        <span class="pl-k">let</span> <span class="pl-kos">(</span>name<span class="pl-kos">,</span> age<span class="pl-kos">,</span> class<span class="pl-kos">)</span> = student<span class="pl-kos">;</span>  
+          
+        <span class="pl-c">// 判断当前学生的姓名是否与要查找的姓名相同  </span>
+        <span class="pl-c">// == 是相等比较运算符  </span>
+        <span class="pl-k">if</span> name == search_name <span class="pl-kos">{</span>  
+            <span class="pl-c">// 找到匹配的学生，打印其信息  </span>
+            <span class="pl-c">// {} 是占位符，会被后面的变量值替换  </span>
+            <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"✓ 找到学生 - 姓名: {}, 年龄: {}, 班级: {}"</span><span class="pl-kos">,</span> name<span class="pl-kos">,</span> age<span class="pl-kos">,</span> class<span class="pl-kos">)</span><span class="pl-kos">;</span>  
+              
+            <span class="pl-c">// 将 found 标记为 true，表示找到了至少一个匹配的学生  </span>
+            found = <span class="pl-c1">true</span><span class="pl-kos">;</span>  
+        <span class="pl-kos">}</span>  
+        <span class="pl-c">// 如果不匹配，继续循环查找下一个学生  </span>
+    <span class="pl-kos">}</span>  
+  
+    <span class="pl-c">// ==================== 检查是否找到学生 ====================    </span>
+    <span class="pl-c">// !found 表示 found 为 false，即没有找到任何匹配的学生  </span>
+    <span class="pl-k">if</span> !found <span class="pl-kos">{</span>  
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"✗ 未找到名为 {} 的学生。"</span><span class="pl-kos">,</span> search_name<span class="pl-kos">)</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span></pre></div>
+<h4>显示所有学生</h4>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-k">fn</span> show_all_students<span class="pl-kos">(</span><span class="pl-s1">students</span><span class="pl-kos">:</span> <span class="pl-c1">&amp;</span><span class="pl-k">mut</span> <span class="pl-smi">Vec</span><span class="pl-kos">&lt;</span><span class="pl-kos">(</span><span class="pl-smi">String</span><span class="pl-kos">,</span> <span class="pl-smi">u8</span><span class="pl-kos">,</span> <span class="pl-smi">String</span><span class="pl-kos">)</span><span class="pl-kos">&gt;</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"<span class="pl-cce">\n</span>--- 所有学生列表 ---"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+  
+    <span class="pl-c">// ==================== 检查列表是否为空 ====================    </span>
+    <span class="pl-k">if</span> students<span class="pl-kos">.</span><span class="pl-en">is_empty</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>  
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"暂无数据"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+        <span class="pl-k">return</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span>  
+  
+    <span class="pl-c">// ==================== 遍历并显示所有学生 ====================    </span>
+    <span class="pl-c">// 创建序号计数器，从 1 开始  </span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> index = <span class="pl-c1">1</span><span class="pl-kos">;</span>  
+      
+    <span class="pl-c">// for 循环遍历 students 列表  </span>
+    <span class="pl-k">for</span> student <span class="pl-k">in</span> students <span class="pl-kos">{</span>  
+        <span class="pl-c">// 解构元组，获取姓名、年龄、班级  </span>
+        <span class="pl-k">let</span> <span class="pl-kos">(</span>name<span class="pl-kos">,</span> age<span class="pl-kos">,</span> class<span class="pl-kos">)</span> = student<span class="pl-kos">;</span>  
+          
+        <span class="pl-c">// 打印学生信息，格式：序号-&gt;姓名，年龄，班级  </span>
+        <span class="pl-c">// {index}、{name}、{age}、{class} 是占位符  </span>
+        <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"序号：{index}-&gt;姓名：{name}，年龄：{age}，班级：{class}"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>  
+          
+        <span class="pl-c">// 序号加 1，为下一个学生做准备  </span>
+        index += <span class="pl-c1">1</span><span class="pl-kos">;</span>  
+    <span class="pl-kos">}</span></pre></div>
+</div>
+<div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://ClaudeRead.github.io">ClaudeRead</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("09/12/2018"!=""){
+    var startSite=new Date("09/12/2018");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek main https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","ClaudeRead/ClaudeRead.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>

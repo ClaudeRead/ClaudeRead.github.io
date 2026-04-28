@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/252286375?v=4&size=64"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="&emsp;&emsp;综述：在ISO 27001中，核心是风险评估，但是GB/T 20984-2022《信息安全技术 信息安全风险评估方法》也是风险评估。">
+<meta property="og:title" content="ISO27001-风险评估工作记录">
+<meta property="og:description" content="&emsp;&emsp;综述：在ISO 27001中，核心是风险评估，但是GB/T 20984-2022《信息安全技术 信息安全风险评估方法》也是风险评估。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/ISO27001--feng-xian-ping-gu-gong-zuo-ji-lu.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
+<title>ISO27001-风险评估工作记录</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">ISO27001-风险评估工作记录</h1>
+<div class="title-right">
+    <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/26" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>  综述：在ISO 27001中，核心是风险评估，但是GB/T 20984-2022《信息安全技术 信息安全风险评估方法》也是风险评估。问题来了，两者都涉及风险评估，区别是什么？</p>
+<h3>一、风险评估在 ISO 27001 中的位置</h3>
+<p>  ISO/IEC 27001条款6.1"Actions to address risks and opportunities"<code class="notranslate">中明确要求：组织必须通过风险评估 + 风险处置来管理信息安全风险</code>。其中：在6.1.2中的<code class="notranslate">Information security risk assessment</code>明确指出<code class="notranslate">要求组织定义并实施信息风险安全评估过程，该过程必须包括：风险识别、风险分析、风险评价</code>。<br>
+  ISO27001把信息安全管理体系看成基于风险的管理体系，所以明确有哪些资产、这些资产面对哪些威胁、这些资产中哪些有脆弱性并且这些脆弱点会造成多大的影响。在根据风险大小决定要上哪些控制措施（技术、管理、物理）。这些控制措施被写入适用性声明（Statement of Applicability, SoA），而 SoA 本身就是"风险评估与处置结果与实际落地实施之间的桥梁"。</p>
+<h3>二、ISO 27001 对"安全风险评估"的具体要求</h3>
+<ul>
+<li>条款 6.1.2 的核心要求(这是必须要满足的)<br>
+ - 定义并维护一个正式的“风险评估方法论”<br>
+  - 明确如何做风险识别、分析、评价；<br>
+  - 定义影响等级和可能性等级（例如 1–5 级）及其含义；<br>
+  - 确保多次评估结果一致、可比、可复现。<br>
+ - 确定风险可接受准则（risk acceptance criteria）<br>
+  - 明确什么风险是“可接受 / 不可接受”；<br>
+  - 通常由管理层（甚至董事会）批准风险偏好/容忍度<br>
+ - 风险评估过程必须包含三个子步骤<br>
+  - 风险识别：找出资产、威胁、脆弱性；<br>
+  - 风险分析：评估影响和可能性；<br>
+  - 风险评价：将风险与可接受准则比较，判断是否可接受。<br>
+  从流程上看，ISO 27001 只规定了一个高层级的过程模型："识别 – 分析 – 评价"，并不限定具体资产分类、威胁/脆弱性赋值方式、计算公式等。</li>
+</ul>
+<h3>三、ISO27001中风险评估与风险处置和SoA的关系</h3>
+<p>  在6.1.3 Information security risk treatment中要求组织对不可接受的风险选择适当的风险处置方式（规避、降低、转移、接受），并选择相应的控制措施。风险处置的主要产出是：风险处置计划（Risk Treatment Plan）和适用性声明（SoA）。其中SoA列出决定采用的所有控制措施（通常来自 ISO 27001 附录 A）；说明哪些控制适用 / 不适用，以及适用/不适用原因以及记录每个控制的实施状态（已实施 / 计划中 / 部分实施等）。</p>
+<h3>四、GB/T 20984‑2022 的风险评估流程</h3>
+<ul>
+<li>流程阶段: 评估准备 → 风险识别 → 风险分析 → 风险评价</li>
+<li>风险识别阶段细化为：<br>
+ - 资产识别（业务资产、系统资产、系统组件和单元资产）<br>
+ - 威胁识别（来源、主体、种类、动机、时机、频率等）<br>
+ - 已有安全措施识别（预防性 / 保护性）<br>
+ - 脆弱性识别（管理 + 技术，分别赋值“被利用难易程度”和“影响程度”）</li>
+<li>风险分析：基于风险计算模型，对单个资产风险值进行计算与等级划分，再由资产风险推断业务风险</li>
+<li>风险评价：依据风险评价准则，对风险结果进行等级划分，并支撑业务风险管控<br>
+同时，标准强调：以业务为最高管控对象，资产按"业务资产 → 系统资产 → 组件/单元资产"分层,增加了沟通与协商机制，要求评估过程中与内外部相关方保持沟通.</li>
+</ul>
+<h3>五、二者关系</h3>
+<p>  ISO/IEC 27001要求组织建立并应用风险评估过程，但它不规定具体怎么评估，比如如何得出概率、影响值等细节。它更偏向“控制要求”，属于管理体系要求。<br>
+  GB/T 20984-2022则可作为或帮助组织满足ISO/IEC 27001风险评估要求的具体方法论标准。组织完全可以结合GB/T 20984-2022来设计其风险评估流程，使其既符合ISO/IEC 27001要求，又具有更高的实施规范性和一致性。</p>
+<h3>六、主要差异</h3>
+<ol>
+<li>
+<p>标准定位和约束力不同<br>
+  ISO/IEC 27001:2022是一个管理体系要求标准（Requirements），用于指导组织建立、实施、维护和持续改进信息安全管理体系（ISMS）。风险评估只是其中一部分要求，是构建整个体系的基础。它规定了组织必须“定义并应用风险评估过程”，确保其结果可重复、有效、可比较，且用于风险处置决策等，但不详细规定具体方法、步骤或计算公式。评估方法由组织自主选择（可定性、定量或混合）。其目标是通过系统化风险管理，建立并保持符合要求的 ISMS，实现信息安全的持续可控，满足认证与合规要求。覆盖组织全范围的信息安全，强调PDCA 循环与持续改进。<br>
+  GB/T 20984-2022《信息安全风险评估方法》是一项国家标准（信息安全技术系列），专门针对风险评估的基本概念、要素关系、风险分析原理、评估流程、评估方法以及在信息系统全生命周期中如何实施等内容进行详细说明。强调风险要素（资产、威胁、脆弱性等）及它们的关系，并给出风险识别、分析、评价等方法指导。是一个过程性、方法性更强的标准，具有一定的“操作指导性”，适合作为实施风险评估时的具体参考框架。针对范围是对特定信息系统、业务场景开展专项评估，也可作为 ISMS 风险评估的技术实现手段。</p>
+</li>
+<li>
+<p>评估流程划分不同</p>
+</li>
+</ol>
+<ul>
+<li>ISO/IEC 27001流程<br>
+ - 环境与范围确定：理解组织环境、相关方需求，确定 ISMS 范围。<br>
+ - 风险评估：识别→分析→评价（核心三阶段）。<br>
+ - 风险处置：选择处置措施（规避、降低、转移、接受）。<br>
+ - 控制措施实施与运行：落实控制，监控有效性。<br>
+ - 绩效评价与持续改进：内审、管理评审，优化体系。</li>
+<li>GB/T 20984-2022 流程（明确四阶段）<br>
+ - 评估准备：确定目标、范围、团队、依据、风险准则、方案并获批。<br>
+ - 风险识别：资产识别（业务 / 系统 / 数据）+ 威胁识别（来源 / 主体 / 动机 / 频率）+ 脆弱性识别（管理 / 技术）+ 已有安全措施识别。<br>
+ - 风险分析：计算可能性（威胁频率 × 脆弱性利用难度 × 措施失效概率）与影响（资产价值 × 损失程度），得出风险值。<br>
+ - 风险评价：对照风险准则，划分风险等级（1-5 级），区分系统资产风险与业务风险。</li>
+</ul>
+<ol start="3">
+<li>核心要素与分析维度差异</li>
+</ol>
+<ul>
+<li>资产不同<br>
+ - ISO 27001：以信息资产为核心，涵盖硬件、软件、数据、人员、流程等，强调资产对信息安全目标的支撑。<br>
+ - GB/T 20984-2022：从业务驱动出发，扩展为业务资产、系统资产、数据资源、基础网络四大类，更强调资产与业务的关联及业务连续性影响。</li>
+<li>威胁与脆弱性分析<br>
+ - ISO 27001：框架性要求识别威胁与脆弱性，未细化分类与分析维度。<br>
+ - GB/T 20984-2022：威胁需分析来源（环境 / 意外 / 人为）、主体、动机（恶意 / 非恶意）、时机、频率；脆弱性从管理、技术双维度分析被利用难度与影响程度；并明确已有安全措施的有效性分析。</li>
+<li>适用场景与合规导向不同<br>
+ - ISO/IEC 27001：适用于建立 ISMS 并寻求认证的组织，强调管理体系的完整性、持续性与符合性，是国际通用的管理合规标准。<br>
+ - GB/T 20984-2022：适用于国内各类组织开展专项风险评估，是等保、关基、数据安全等合规要求的技术支撑，更贴合国内网络安全监管场景。</li>
+</ul>
+<ol start="4">
+<li>实施/审计上的区别</li>
+</ol>
+<ul>
+<li>ISO 27001 审核侧重点<br>
+ - 关注是否有定义好的风险评估过程（包含准则、范围、风险识别、分析、评价等步骤）。<br>
+ - 关注风险评估结果是否被用于制定风险处理计划、选择控制措施并体现在SOA等文件中。<br>
+ - 不要求必须采用某一个具体的评估模型或参考标准。</li>
+<li>GB/T 20984-2022 侧重点<br>
+ - 更关注评估方法本身的科学性、逻辑性、完整性（如如何识别资产、如何定义威胁、脆弱性等）。<br>
+ - 适合作为落地评估过程时的流程设计、工具选择参考标准。</li>
+</ul>
+<h3>七、参考链接</h3>
+<ol>
+<li><a href="https://www.iso.org/standard/27001" rel="nofollow">https://www.iso.org/standard/27001</a></li>
+<li><a href="https://www.iso.org/obp/ui/#!iso:std:82875:en" rel="nofollow">https://www.iso.org/obp/ui/#!iso:std:82875:en</a></li>
+<li><a href="https://openstd.samr.gov.cn/" rel="nofollow">https://openstd.samr.gov.cn/</a></li>
+<li><a href="https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=FDA38AB7D08A715C6B6D69DFDEABB2C0&amp;refer=outter" rel="nofollow">https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=FDA38AB7D08A715C6B6D69DFDEABB2C0&amp;refer=outter</a></li>
+<li><a href="https://www.spc.org.cn/online/91eb09e1c2e582bb29aacc38d3915c3e.html" rel="nofollow">https://www.spc.org.cn/online/91eb09e1c2e582bb29aacc38d3915c3e.html</a></li>
+<li><a href="https://www.renrendoc.com/paper/216940508.html" rel="nofollow">https://www.renrendoc.com/paper/216940508.html</a></li>
+<li><a href="https://www.cssn.net.cn/cssn/productDetail/7ef4e5235dfae28a334a973411a7cf26" rel="nofollow">https://www.cssn.net.cn/cssn/productDetail/7ef4e5235dfae28a334a973411a7cf26</a></li>
+<li><a href="https://www.27001.org.cn/850.html" rel="nofollow">https://www.27001.org.cn/850.html</a></li>
+<li><a href="https://www.antpedia.com/standard/1085474087-1.html" rel="nofollow">https://www.antpedia.com/standard/1085474087-1.html</a></li>
+<li><a href="http://cdn.standards.iteh.ai/samples/82875/726bcf58250e43d9a666b4d929c8fbdb/ISO-IEC-27001-2022.pdf" rel="nofollow">http://cdn.standards.iteh.ai/samples/82875/726bcf58250e43d9a666b4d929c8fbdb/ISO-IEC-27001-2022.pdf</a></li>
+<li><a href="https://www.isms.online/iso-27001/requirements-2022/8-2-information-security-risk-assessment-2022/" rel="nofollow">https://www.isms.online/iso-27001/requirements-2022/8-2-information-security-risk-assessment-2022/</a></li>
+<li><a href="https://hea.china.com/hea/20221011/202210111156895.html" rel="nofollow">https://hea.china.com/hea/20221011/202210111156895.html</a></li>
+<li><a href="https://www.sohu.com/a/677434959_121690006" rel="nofollow">https://www.sohu.com/a/677434959_121690006</a></li>
+<li><a href="http://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=FDA38AB7D08A715C6B6D69DFDEABB2C0" rel="nofollow">http://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=FDA38AB7D08A715C6B6D69DFDEABB2C0</a></li>
+</ol>
+</div>
+<div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://ClaudeRead.github.io">ClaudeRead</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("09/12/2018"!=""){
+    var startSite=new Date("09/12/2018");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek main https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","ClaudeRead/ClaudeRead.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>

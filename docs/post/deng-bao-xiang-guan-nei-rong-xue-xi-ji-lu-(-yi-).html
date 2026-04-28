@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/252286375?v=4&size=64"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="#### 一、什么是等保
+&emsp;&emsp;'等保2.0'，是指以 2019 年发布的新一代网络安全等级保护标准为标志的等级保护制度，以《中华人民共和国网络安全法》为上位法，第二十一条明确'国家实行网络安全等级保护制度'，使等保成为网络运营者的法律义务。">
+<meta property="og:title" content="等保相关内容学习记录(一)">
+<meta property="og:description" content="#### 一、什么是等保
+&emsp;&emsp;'等保2.0'，是指以 2019 年发布的新一代网络安全等级保护标准为标志的等级保护制度，以《中华人民共和国网络安全法》为上位法，第二十一条明确'国家实行网络安全等级保护制度'，使等保成为网络运营者的法律义务。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/deng-bao-xiang-guan-nei-rong-xue-xi-ji-lu-%28-yi-%29.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
+<title>等保相关内容学习记录(一)</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">等保相关内容学习记录(一)</h1>
+<div class="title-right">
+    <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/36" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h4>一、什么是等保</h4>
+<p>  "等保2.0"，是指以 2019 年发布的新一代网络安全等级保护标准为标志的等级保护制度，以《中华人民共和国网络安全法》为上位法，第二十一条明确"国家实行网络安全等级保护制度"，使等保成为网络运营者的法律义务。以 2019 年发布的GB/T 22239‑2019《信息安全技术 网络安全等级保护基本要求》为核心代表，替代2008版的GB/T 22239‑2008，因此业内习惯称为"等保2.0"。<br>
+  对比"等保1.0"，等保2.0扩展到"云、移、物、工、大"，包括：基础信息网络 / 平台、云计算平台 / 系统、大数据平台 / 应用、物联网系统、工业控制系统、采用移动互联技术的系统等。在GB/T 22239‑2019基本要求中采用"安全通用要求 + 安全扩展要求"结构，安全通用要求有物理、通信网络、区域边界、计算环境、管理中心等层面。安全扩展要求有云计算、移动互联、物联网、工业控制系统和大数据等扩展要求。<br>
+  "等保2.0"的防护理念从"被动防御"走向"主动防御、整体防控"。提出"一个中心、三重防御"的框架：其中一个中心为安全管理中心，三重防御是指安全通信网络、安全区域边界、安全计算环境。<br>
+  "等保2.0"对比之前定级流程更加严格，二级以上系统需要专家评审+主管部门审核，关键信息基础设施原则上定级为第三级及以上。</p>
+<h4>二、等保 2.0核心标准</h4>
+<p>  GB/T 22239‑2019《信息安全技术 网络安全等级保护基本要求》大致作用为核心标准，规定一至四级的安全通用要求和云计算、移动互联、物联网、工业控制、大数据等扩展要求，是“建设整改和测评的直接依据”。<br>
+  GB/T 28448‑2019《信息安全技术 网络安全等级保护测评要求》大致作用规定各等级的测评要求、测评方法和单元测评，用于指导等级测评机构开展测评工作。<br>
+  GB/T 25070‑2019《信息安全技术 网络安全等级保护安全设计技术要求》从“一个中心、三重防护”出发，规定不同等级系统的安全设计技术要求，用于指导安全方案设计。</p>
+<h4>三、配套工作与实施类标准、基础与关联标准</h4>
+<p>  GB/T 22240‑2020《信息安全技术 网络安全等级保护定级指南》指导如何确定定级对象、划分安全保护等级。<br>
+  GB/T 25058‑2019《信息安全技术 网络安全等级保护实施指南》给出等级保护工作的总体实施流程和方法，适合作为“总说明书”。<br>
+  GB/T 28449‑2018《信息安全技术 网络安全等级保护测评过程指南》规范测评准备、方案编制、现场测评、报告编制等过程。<br>
+  GB/T 36958‑2018《信息安全技术 网络安全等级保护安全管理中心技术要求》等对安全管理中心等提出技术要求，是“一个中心”的落地支撑。<br>
+  GB 17859‑1999《计算机信息系统安全保护等级划分准则》最早的等级划分基础标准，定义了五个安全等级。<br>
+  GB/T 20984‑2022《信息安全技术 信息安全风险评估方法》最新版风险评估国家标准，用于指导信息安全风险评估工作，是等保之外的重要方法类标准。<br>
+  其他如 GB/T 35273‑2020《个人信息安全规范》、GM/T 0054‑2018《信息系统密码应用基本要求》等，常作为等保建设中的补充安全要求。</p>
+<h4>四、等保 2.0 与风险评估的关系</h4>
+<p>  本质上，等级保护是国家网络安全基本制度，是一套完整的制度体系（定级、备案、建设整改、测评、监督检查）。而风险评估则是信息安全风险管理中的技术手段，是“识别风险、分析风险、评价风险”的过程。<br>
+  从目标层面等保2.0解决“该达到什么安全水平”“是否合规”的问题，强调按等级建设和监管，风险评估解决的是“当前风险有多大”“哪些风险需要优先处理”的问题，支撑风险决策和安全需求分析。<br>
+  从视角层面，等保更偏向于合规 + 建设，而风险评估更偏向于风险+管理。</p>
+<h4>五、GB/T 22239-2019</h4>
+<h5>1. 整体框架</h5>
+<p>  前言、引言，说明标准修订背景（适配新法与新技术）、与旧版的核心差异、关联标准体系（如定级指南 GB/T22240、测评要求 GB/T28448 等），并明确黑体字为高等级新增 / 增强要求。<br>
+  1-5章为规定标准范围（指导非涉密对象 1-4 级安全建设）、规范性引用文件，界定网络安全、云计算、物联网、工业控制系统等核心术语与缩略语；核心阐述网络安全等级保护概述，明确等级保护对象（基础信息网络、云平台、物联网、工控系统等）、1-5 级安全保护能力要求，以及安全通用要求 + 安全扩展要求的核心分类体系。<br>
+  6-10章标准核心内容，按 1-5 级依次规定安全要求，其中第五级因特殊管理模式仅作提及，无具体条款；每一级要求均分为安全通用要求（覆盖安全物理环境、安全通信网络、安全区域边界、安全计算环境、安全管理中心 5 大技术维度，及安全管理制度、机构、人员、建设管理、运维管理 5 大管理维度）和安全扩展要求（针对云计算、移动互联、物联网、工业控制系统 4 大新技术场景提出个性化要求）。<br>
+  附录部分则明确安全要求的选择使用方法、等级保护对象整体安全保护能力要求、安全框架与关键技术使用要求；资料性附录详细说明云计算、移动互联、物联网、工业控制系统、大数据的应用场景，及各场景下安全要求的适配方法。</p>
+<h5>2. 各个级别的核心差异</h5>
+<p>  二级要求的核心是“基础可控、流程规范”，满足中小型组织、一般重要信息系统的安全防护需求，以 “配置 + 制度” 为主，无需高强度密码技术、专职安全团队、集中管控平台；三级要求的核心是“纵深防御、集中管控、专业保障”，满足大中型组织、重要信息系统（如政府部门、金融机构核心系统）的安全防护需求，新增密码技术全面应用、硬件冗余、集中管控、专职安全团队、第三方监督等要求，防护能力从 “基础可控” 提升至 “主动防御、集中管理”。</p>
+<h5>3. 技术要求强度差异</h5>
+<p>  技术要求围绕 “物理环境、通信网络、区域边界、计算环境、管理中心”5 大维度，呈现从“基础配置”到 “冗余加固、密码技术、可信验证”，从 “单一防护” 到 “多层防护、集中监测”的递进：1-2 级以基础防护为主，如物理环境仅需基本的门禁、防火、供电；计算环境仅需基础身份鉴别、防恶意代码；3级新增密码技术应用（数据传输 / 存储的机密性 / 完整性）、硬件冗余（通信线路、电力）、可信验证（动态检测）、集中管控等要求，如身份鉴别要求双因子认证、访问控制粒度到用户 / 文件级；4级进一步强化高强度密码技术（硬件密码模块）、双重物理防护（重要区域二道门禁）、异地灾备中心（业务实时切换）、全环节动态可信验证、强制访问控制等要求，技术防护的强度、覆盖度、智能化程度大幅提升。</p>
+<h5>4. 管理要求精细化程度差异</h5>
+<p>  管理要求围绕“制度、机构、人员、建设、运维”5 大维度，呈现从 “基础制度 / 岗位” 到 “专职机构 / 人员、全流程审批、定期测评、集中审计”的递进：1级仅需建立基础管理制度、设立系统管理员岗位；2级要求制定完整安全策略、设立安全管理职能部门、明确岗位分离、定期备份与应急演练；3级要求成立网络安全委员会 / 领导小组、配备专职安全管理员（不可兼任）、全流程审批（系统变更、物理访问）、定期等级测评、第三方工程监理，管理流程更精细化、规范化；4级进一步要求关键岗位多人共管、内部选拔关键岗位人员、关键区域禁止外部人员访问、跨单位联合应急、重要产品专项测试，管理的严格性、专业性、协同性大幅提升。</p>
+<h5>5. 扩展要求适配性差异</h5>
+<p>  针对云计算、移动互联、物联网、工控系统的扩展要求，随等级提升呈现从 “基础隔离 / 管控” 到 “高强度认证 / 审计、主动检测 / 阻断、全生命周期管理”** 的递进：2级扩展要求仅需基础隔离（如云平台虚拟网络隔离、工控系统与企业网技术隔离）、基础管控（如移动应用可靠签名、物联网感知节点授权接入）；3级新增主动检测 / 阻断（如移动互联阻断非授权终端、工控系统检测非法无线设备）、高强度认证（如移动互联采用密码模块认证）、全生命周期管理（如物联网感知节点全流程管理）；4级进一步强化资源独立（如云平台为四级业务划分独立资源池）、单向强隔离（如工控系统与企业网专用产品单向隔离）、专用管控（如移动终端仅处理指定业务），适配新技术场景的安全防护要求更严苛。</p>
+<h4>六、总结</h4>
+<p>网络安全等级保护是依据保护对象在国家安全、经济建设等中的重要程度及受损后的危害程度划分等级，为非涉密对象制定对应等级的安全通用与扩展要求，指导其安全建设和监督管理的网络安全防护制度。等级保护1-4级要求从安全保护能力、技术防护强度、管理精细化程度、扩展要求适配性上呈现出从基础防护到纵深防御、从人工零散管理到专业集中管控、从单一基础管控到智能高强度防护的逐级递进特征。网络安全等级保护工作中需结合风险评估结果补充和调整安全措施，风险评估是等级保护对象确定安全保护等级、选择适配安全要求的重要依据，二者相辅相成共同保障保护对象的网络安全。</p>
+<h4>参考链接</h4>
+<ul>
+<li><a href="https://wenku.csdn.net/doc/6984y4f77m" rel="nofollow">https://wenku.csdn.net/doc/6984y4f77m</a></li>
+<li><a href="https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF" rel="nofollow">https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF</a></li>
+</ul>
+</div>
+<div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://ClaudeRead.github.io">ClaudeRead</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("09/12/2018"!=""){
+    var startSite=new Date("09/12/2018");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek main https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","ClaudeRead/ClaudeRead.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
