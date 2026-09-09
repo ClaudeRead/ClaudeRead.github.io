@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Tue, 28 Apr 2026 17:44:34 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>HackTheBox</title><link>https://ClaudeRead.github.io/post/HackTheBox.html</link><description>## Network Communication
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>ClaudeRead</title><link>https://ClaudeRead.github.io</link><description>言而欲止，止又欲言，胡言乱语，语无伦次，信口雌黄，逐渐癫狂~~~</description><copyright>ClaudeRead</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/252286375?v=4&amp;size=64</url><title>avatar</title><link>https://ClaudeRead.github.io</link></image><lastBuildDate>Wed, 09 Sep 2026 13:45:03 +0000</lastBuildDate><managingEditor>ClaudeRead</managingEditor><ttl>60</ttl><webMaster>ClaudeRead</webMaster><item><title>记一次没有收尾的应急</title><link>https://ClaudeRead.github.io/post/ji-yi-ci-mei-you-shou-wei-de-ying-ji.html</link><description># 一、起因
+&amp;emsp;&amp;emsp;2026年9月9日17时32分，接到朋友求助，如图：
+
+&lt;img width='679' height='230' alt='Image' src='https://github.com/user-attachments/assets/2a54b7cb-68db-4879-b187-6722bf94372d' /&gt;
+
+&amp;emsp;&amp;emsp;刚开始我以为是鼠标坏了，但是朋友反馈说鼠标是新换的，所以排除这个选项。</description><guid isPermaLink="true">https://ClaudeRead.github.io/post/ji-yi-ci-mei-you-shou-wei-de-ying-ji.html</guid><pubDate>Wed, 09 Sep 2026 13:44:29 +0000</pubDate></item><item><title>HackTheBox</title><link>https://ClaudeRead.github.io/post/HackTheBox.html</link><description>## Network Communication
 - What protocol maps IP addresses to MAC addresses?(哪种协议将 IP 地址映射到 MAC 地址？)
  &gt; ARP
 
